@@ -1,0 +1,16 @@
+{
+	"extends": ["airbnb-base", "airbnb-typescript/base"],
+	"parserOptions": {
+		"project": "./tsconfig.json"
+	},
+	"rules": {
+		"no-tabs": "off",
+		"@typescript-eslint/indent": ["error", "tab"],
+		"@typescript-eslint/lines-between-class-members": "off",
+		"@typescript-eslint/switch-exhaustiveness-check": "error",
+		"default-case": "off",
+		"max-len": ["error", { "code": 120 }],
+		"consistent-return": "off",
+		"@typescript-eslint/explicit-function-return-type": "error"
+	}
+}
