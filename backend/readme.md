@@ -2,6 +2,8 @@
 
 ## Cerber - authentication
 
+## Hades - frontend
+
 ## hermes - orders and deliveries
 
 ## plutus - payments
