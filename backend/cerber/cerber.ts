@@ -44,6 +44,12 @@ const init = async (): Promise<void> => {
 	app.use(CookieParser());
 	app.use(tokenProvider.middleware());
 
+	app.use((req, res, next) => {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "*")
+		next();
+	});
+
 	const authService = new AuthService(tokenProvider);
 	const authController = new AuthController(authService);
 	authController.register(app);
