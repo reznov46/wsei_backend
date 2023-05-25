@@ -4,6 +4,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { routeBuilder } from "../../routes/routes";
+
 interface NavbarList {
   text: string;
   link: string;
