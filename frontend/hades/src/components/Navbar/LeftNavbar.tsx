@@ -21,6 +21,9 @@ export const LeftNavbar: React.FC = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const logoutElement = navbarList[navbarList.length - 1];
+
   return (
     <>
       <NavToolBar
@@ -34,18 +37,24 @@ export const LeftNavbar: React.FC = () => {
           </IconButton>
         </DrawerHeader>
         <List>
-          {navbarList.map(({ text, link, icon }, index) => (
-            <div key={index}>
-              <NavbarItem
-                open={open}
-                icon={icon}
-                text={text}
-                link={link}
-              />
-            </div>
-          ))}
+          {navbarList.slice(0, navbarList.indexOf(logoutElement))
+            .map((item, index) => (
+              <div key={index}>
+                <NavbarItem
+                  open={open}
+                  {...item}
+                />
+              </div>
+            ))
+          }
         </List>
         <Divider />
+        <div style={{ marginTop: 'auto' }}>
+          <NavbarItem
+            open={open}
+            {...logoutElement}
+          />
+        </div>
       </Drawer>
     </>
   );

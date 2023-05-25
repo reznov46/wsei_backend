@@ -93,5 +93,5 @@ export const NavToolBar: React.FC<{
           <MenuIcon />
         </IconButton>
       </Toolbar>
-    </AppBar>
+    </AppBar >
   );
