@@ -1,6 +1,8 @@
 import { styled, Theme, CSSObject } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import { IconButton, Toolbar } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { NAVBAR_WIDTH } from './consts';
 
 export const openedMixin = (theme: Theme): CSSObject => ({
@@ -70,3 +72,26 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
+
+export const NavToolBar: React.FC<{
+  open: boolean,
+  handleDrawerOpen: () => void
+}> = ({
+  open,
+  handleDrawerOpen
+}) => (
+    <AppBar position="fixed" open={open}>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          onClick={handleDrawerOpen}
+          edge="start"
+          sx={{
+            ...(open && { display: 'none' }),
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+  );

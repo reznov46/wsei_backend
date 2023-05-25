@@ -3,7 +3,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
+  Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -20,25 +20,24 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
   text,
   link
 }) => (
-  <ListItem disablePadding sx={{ display: 'block' }}>
-    <ListItemButton>
-      <ListItemIcon
-        sx={{
-          minWidth: 0,
-          mr: open ? 3 : 'auto',
-          justifyContent: 'center',
-        }}
-      >
-        {icon}
-      </ListItemIcon>
-      <ListItemText
-        primary={
-          <Link to={link}>{text}</Link>
-        }
-        sx={
-          { opacity: open ? 1 : 0 }
-        }
-      />
-    </ListItemButton>
-  </ListItem>
+  <Link to={link}>
+    <ListItem disablePadding>
+      <ListItemButton>
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            mr: open ? 3 : 'auto',
+            justifyContent: 'center',
+            marginTop: 1
+          }}
+        >
+          {icon}
+        </ListItemIcon>
+        <Typography sx={{ opacity: open ? 1 : 0 }} style={{ width: '100%' }}>
+          {text}
+        </Typography>
+      </ListItemButton>
+    </ListItem>
+  </Link>
 )
+

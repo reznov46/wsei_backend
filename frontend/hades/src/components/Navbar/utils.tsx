@@ -12,8 +12,10 @@ interface NavbarList {
 }
 
 export const navbarList = [
-  // { text: 'Home', link: routeBuilder.home, icon: <HomeIcon /> },
-  // { text: 'Login', link: routeBuilder.login, icon: <LoginIcon /> },
+  { text: 'Home', link: routeBuilder.home, icon: <HomeIcon /> },
+  { text: 'Login', link: routeBuilder.login, icon: <LoginIcon /> },
   { text: 'Register', link: routeBuilder.register, icon: <LoginIcon /> },
-  // { text: 'Users', link: routeBuilder.users, icon: <PeopleIcon /> },
+  { text: 'Users', link: routeBuilder.users, icon: <PeopleIcon /> },
 ] as Array<NavbarList>
+
+// { text: 'Logout', link: '/logout', icon: <LogoutIcon /> },
