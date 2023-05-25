@@ -1,8 +1,6 @@
 import React from 'react';
-import { LoginForm } from './components/Login/LoginForm';
+import { AppNavigator } from './AppNavigator';
 
-export const App: React.FC = () => {
-  return (
-    <LoginForm />
-  );
-}
+export const App: React.FC = () => (
+  <AppNavigator />
+);
