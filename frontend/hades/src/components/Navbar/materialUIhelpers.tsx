@@ -3,10 +3,10 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NAVBAR_WIDTH } from './consts';
+import { NAVBAR_EXPANDED_WIDTH } from './consts';
 
 export const openedMixin = (theme: Theme): CSSObject => ({
-  width: NAVBAR_WIDTH,
+  width: NAVBAR_EXPANDED_WIDTH,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -39,8 +39,7 @@ export const AppBar = styled(MuiAppBar, {
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    marginLeft: NAVBAR_WIDTH,
-    width: `calc(100% - ${NAVBAR_WIDTH}px)`,
+    width: `calc(100% - ${NAVBAR_EXPANDED_WIDTH}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -50,7 +49,7 @@ export const AppBar = styled(MuiAppBar, {
 
 export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
-    width: NAVBAR_WIDTH,
+    width: NAVBAR_EXPANDED_WIDTH,
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',

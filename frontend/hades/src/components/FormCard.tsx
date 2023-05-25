@@ -1,27 +1,55 @@
-import React, { PropsWithChildren } from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import React from 'react';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  TextField,
+} from '@mui/material';
+import { User } from '../types/user';
 
-export const FormCard: React.FC<PropsWithChildren> = ({ children }) => {
+interface FormCardProps {
+  handleSubmit: () => Promise<void>
+  user: User,
+  setUser: (user: User) => void
+}
+
+export const FormCard: React.FC<FormCardProps> = ({
+  handleSubmit,
+  user,
+  setUser
+}) => {
+  const { username, password } = user;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
+    <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+        <div>
+          <TextField
+            label="Username"
+            variant="standard"
+            value={username}
+            onChange={(evt) => setUser({
+              username: evt.target.value,
+              password: password
+            })}
+          />
+        </div>
+        <div>
+          <TextField
+            label="Password"
+            variant="standard"
+            type='password'
+            value={password}
+            onChange={(evt) => setUser({
+              username: username,
+              password: evt.target.value
+            })}
+          />
+        </div>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={handleSubmit}>Login</Button>
       </CardActions>
     </Card>
   )

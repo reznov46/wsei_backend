@@ -1,17 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { endpoints } from '../../routes/routes';
-import { getTestClient } from '../../utils/testUtils';
+import { endpoints, routeBuilder } from '../../routes/routes';
 import { FormCard } from '../FormCard';
+import { User } from '../../types/user';
+import { useHistory } from 'react-router';
 
 export const LoginForm: React.FC = () => {
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [user, setUser] = useState<User>({
+    username: '',
+    password: ''
+  });
 
-  useEffect(() => {
-    axios.post(endpoints.login, getTestClient('user'))
-      .then(res => setIsLogged(!!res.data))
+  const history = useHistory();
+
+  // create hook
+  const handleSubmit = async () => {
+    await axios.post(endpoints.login, {
+      username: user.username,
+      password: user.password
+    })
+      .then(res => {
+        console.log(res.data)
+        history.push(routeBuilder.home);
+      })
       .catch(err => console.log(err))
-  }, [isLogged])
 
-  return <FormCard>{'Login Component'}</FormCard>
+    setUser({
+      username: '',
+      password: ''
+    });
+
+  }
+
+  return (
+    <FormCard
+      handleSubmit={handleSubmit}
+      user={user}
+      setUser={setUser}
+    />
+  )
 }
