@@ -23,7 +23,7 @@ export const AppNavigator: React.FC = () => (
       exact
     />
     <Route
-      path={'/details'}
+      path={routeBuilder.details}
       component={UserDetails}
       exact
     />
@@ -32,4 +32,4 @@ export const AppNavigator: React.FC = () => (
       children={'no page'}
     />
   </Switch>
-);
+)

@@ -17,7 +17,7 @@ export const LoginForm: React.FC = () => {
   const handleSubmit = async () => {
     await axios.post(endpoints.login, user)
       .then((response: LoginResponse) => {
-        history.push(routeBuilder.home);
+        history.push(routeBuilder.details)
         window.localStorage.setItem(JWT_KEY, response.data.token)
       })
       .catch((error: ErrorResponse) => setError(error.response.data));

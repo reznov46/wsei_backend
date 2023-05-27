@@ -20,12 +20,21 @@ export const UserDetails: React.FC = () => {
   const { jwt } = useGetJwt();
 
   useEffect(() => {
-    axios.post(endpoints.verify, {
-      token: jwt
-    })
-      .then((response) => setUser(response.data.user))
-      .catch(err => console.log(err))
+    if (jwt.length) {
+      axios.post(endpoints.verify, {
+        token: jwt
+      })
+        .then((response) => setUser(response.data.user))
+        .catch(err => console.log(err))
+    }
   }, [jwt])
 
-  return <>details</>
+  return (
+    <div>
+      <div>{user.id}</div>
+      <div>{user.username}</div>
+      <div>{user.level}</div>
+      <div>{user.createdAt}</div>
+    </div>
+  )
 }
