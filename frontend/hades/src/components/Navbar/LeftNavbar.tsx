@@ -14,13 +14,13 @@ import {
 export const LeftNavbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
+  const logoutElement = navbarList[navbarList.length - 1];
+
   const handleDrawerOpen = () =>
     setOpen(true);
 
   const handleDrawerClose = () =>
     setOpen(false);
-
-  const logoutElement = navbarList[navbarList.length - 1];
 
   return (
     <>
