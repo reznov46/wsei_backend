@@ -11,8 +11,9 @@ export const endpoints = {
 } as Route
 
 export const routeBuilder = {
-  defaultPath: '/',
+  home: '/home',
   login: '/login',
   noPage: '*',
   register: '/register',
+  users: '/users'
 } as Route
