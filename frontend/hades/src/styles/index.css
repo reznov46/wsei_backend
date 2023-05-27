@@ -6,7 +6,7 @@
 
 body, #root {
   height: 100vh;
-  margin-top: 64px; /* NAVBAR_EXPANDED_WIDTH */
+  margin-top: 64px; /* NAVBAR_HEIGHT */
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

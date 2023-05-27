@@ -8,7 +8,8 @@ const DEFAULT_BACKEND_HOST =
 export const endpoints = {
   login: `${DEFAULT_BACKEND_HOST}/login`,
   register: `${DEFAULT_BACKEND_HOST}/register`,
-} as Route
+  verify: `${DEFAULT_BACKEND_HOST}/verify`,
+}
 
 export const routeBuilder = {
   home: '/home',

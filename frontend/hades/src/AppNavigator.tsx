@@ -3,6 +3,7 @@ import { routeBuilder } from './routes/routes';
 import { LoginForm } from './components/Login/LoginForm';
 import { RegisterForm } from './components/Register/RegisterForm';
 import { Route, Switch } from 'react-router-dom'
+import { UserDetails } from './components/UserDetails/UserDetails';
 
 export const AppNavigator: React.FC = () => (
   <Switch>
@@ -19,6 +20,11 @@ export const AppNavigator: React.FC = () => (
     <Route
       path={routeBuilder.register}
       component={RegisterForm}
+      exact
+    />
+    <Route
+      path={'/details'}
+      component={UserDetails}
       exact
     />
     <Route
