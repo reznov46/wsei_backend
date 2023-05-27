@@ -1,40 +1,29 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useGetJwt } from '../../hooks/useGetJwt';
-import { endpoints } from '../../routes/routes';
-
-interface UserDetails {
-  id: string;
-  username: string;
-  level: string;
-  createdAt: string;
-}
+import React from 'react';
+import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
 
 export const UserDetails: React.FC = () => {
-  const [user, setUser] = useState<UserDetails>({
-    id: '',
-    username: '',
-    level: '',
-    createdAt: '',
-  })
-  const { jwt } = useGetJwt();
+  const { data, loading, error } = useGetCurrentUserDetails();
+  const {
+    id,
+    username,
+    level,
+    createdAt
+  } = data;
 
-  useEffect(() => {
-    if (jwt.length) {
-      axios.post(endpoints.verify, {
-        token: jwt
-      })
-        .then((response) => setUser(response.data.user))
-        .catch(err => console.log(err))
-    }
-  }, [jwt])
+  if (loading) {
+    return <>loading</>
+  }
+
+  if (error) {
+    return <>{error}</>
+  }
 
   return (
     <div>
-      <div>{user.id}</div>
-      <div>{user.username}</div>
-      <div>{user.level}</div>
-      <div>{user.createdAt}</div>
+      <div>{id}</div>
+      <div>{username}</div>
+      <div>{level}</div>
+      <div>{createdAt}</div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { User } from "../types/user";
+import { User, UserDetails } from '../types/user';
 
 export const emptyUser = {
   username: '',
@@ -6,3 +6,10 @@ export const emptyUser = {
   id: '',
   jwt: '',
 } as User
+
+export const emptyCurrentUser = {
+  id: '',
+  username: '',
+  level: '',
+  createdAt: '',
+} as UserDetails

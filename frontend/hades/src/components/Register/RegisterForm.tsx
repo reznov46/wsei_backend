@@ -5,7 +5,7 @@ import { FormCard } from '../Form/FormCard';
 import { User } from '../../types/user';
 import { useHistory } from 'react-router';
 import { emptyUser } from '../../utils/emptyUser';
-import { ErrorResponse } from '../../types/errorResponse';
+import { ErrorResponse } from '../../types/responses';
 
 export const RegisterForm: React.FC = () => {
   const [user, setUser] = useState<User>(emptyUser);

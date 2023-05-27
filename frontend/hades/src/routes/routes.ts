@@ -13,7 +13,7 @@ export const endpoints = {
 
 export const routeBuilder = {
   details: '/details',
-  home: '/home',
+  home: '/',
   login: '/login',
   logout: '/logout',
   noPage: '*',

@@ -5,9 +5,8 @@ import { FormCard } from '../Form/FormCard';
 import { User } from '../../types/user';
 import { useHistory } from 'react-router';
 import { emptyUser } from '../../utils/emptyUser';
-import { ErrorResponse } from '../../types/errorResponse';
-import { LoginResponse } from '../../types/loginResponse';
-import { JWT_KEY } from '../../utils/consts';
+import { ErrorResponse, LoginResponse } from '../../types/responses';
+import { setToken } from '../../utils/token/setToken';
 
 export const LoginForm: React.FC = () => {
   const [user, setUser] = useState<User>(emptyUser);
@@ -17,8 +16,8 @@ export const LoginForm: React.FC = () => {
   const handleSubmit = async () => {
     await axios.post(endpoints.login, user)
       .then((response: LoginResponse) => {
-        history.push(routeBuilder.details)
-        window.localStorage.setItem(JWT_KEY, response.data.token)
+        history.push(routeBuilder.details);
+        setToken(response);
       })
       .catch((error: ErrorResponse) => setError(error.response.data));
   }

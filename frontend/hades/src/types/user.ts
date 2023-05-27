@@ -1,6 +1,11 @@
 export interface User {
   username: string,
   password: string,
-  id?: string
-  jwt?: string
+}
+
+export interface UserDetails {
+  id: string;
+  username: string;
+  level: string;
+  createdAt: string;
 }
