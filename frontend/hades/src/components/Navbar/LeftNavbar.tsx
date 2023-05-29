@@ -10,6 +10,7 @@ import {
   DrawerHeader,
   NavToolBar,
 } from './materialUIhelpers';
+import { removeToken } from '../../utils/token/removeToken';
 
 export const LeftNavbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -50,6 +51,7 @@ export const LeftNavbar: React.FC = () => {
         <div style={{ marginTop: 'auto' }}>
           <NavbarItem
             open={open}
+            handleOnClick={removeToken}
             {...logoutElement}
           />
         </div>

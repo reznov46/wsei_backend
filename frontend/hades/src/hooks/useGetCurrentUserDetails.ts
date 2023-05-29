@@ -12,11 +12,11 @@ export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
   const [error, setError] = useState<string>('');
   const [currentUser, setCurrentUser] = useState<UserDetails>(emptyCurrentUser);
 
-  const jwt = getToken();
+  const token = getToken();
 
   useEffect(() => {
     setIsLoading(true);
-    axios.post(endpoints.verify, { token: jwt })
+    axios.post(endpoints.verify, { token })
       .then((response: UserDetailsResponse) => {
         setCurrentUser(response.data.user);
         setIsLoading(false);
@@ -25,7 +25,7 @@ export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
         setError(error.response.data);
         setIsLoading(false);
       });
-  }, [jwt]);
+  }, [token]);
 
   return {
     data: currentUser,
