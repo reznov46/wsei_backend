@@ -7,11 +7,11 @@ import { UserDetails } from './components/UserDetails/UserDetails';
 import { Users } from './components/Users/Users';
 
 export const AppNavigator: React.FC = () => (
-	<Switch>
-		<Route path={routeBuilder.home} children={'initial'} exact />
-		<Route path={routeBuilder.login} component={LoginForm} exact />
-		<Route path={routeBuilder.register} component={RegisterForm} exact />
-		<Route path={routeBuilder.details} component={UserDetails} exact />
-		<Route path={routeBuilder.users} component={Users} exact />
-	</Switch>
+  <Switch>
+    <Route path={routeBuilder.home} children={'initial'} exact />
+    <Route path={routeBuilder.login} component={LoginForm} exact />
+    <Route path={routeBuilder.register} component={RegisterForm} exact />
+    <Route path={routeBuilder.details} component={UserDetails} exact />
+    <Route path={routeBuilder.users} component={Users} exact />
+  </Switch>
 );
