@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { navbarList } from './utils';
-import { NavbarItem } from './NavbarItem';
 import {
   Drawer,
   DrawerHeader,
   NavToolBar,
-} from './materialUIhelpers';
-import { removeToken } from '../../utils/token/removeToken';
+} from '../../utils/materialUIhelpers';
+import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
+import { UserLevel } from '../../types/user';
+import { isAdmin } from '../../utils/functions';
+import { useGetToken } from '../../hooks/useGetToken';
+import { LoginSection } from './LoginSection';
+import { NavbarList } from './NavbarList';
 
 export const LeftNavbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-
-  const logoutElement = navbarList[navbarList.length - 1];
+  const { data: { level } } = useGetCurrentUserDetails();
+  const { token } = useGetToken();
 
   const handleDrawerOpen = () =>
     setOpen(true);
@@ -36,25 +39,17 @@ export const LeftNavbar: React.FC = () => {
           </IconButton>
         </DrawerHeader>
         <List>
-          {navbarList.slice(0, navbarList.indexOf(logoutElement))
-            .map((item, index) => (
-              <div key={index}>
-                <NavbarItem
-                  open={open}
-                  {...item}
-                />
-              </div>
-            ))
-          }
+          <NavbarList
+            open={open}
+            isAdmin={isAdmin(level as UserLevel)}
+            isUserLogged={Boolean(token?.length)}
+          />
         </List>
         <Divider />
-        <div style={{ marginTop: 'auto' }}>
-          <NavbarItem
-            open={open}
-            handleOnClick={removeToken}
-            {...logoutElement}
-          />
-        </div>
+        <LoginSection
+          open={open}
+          isUserLogged={Boolean(token?.length)}
+        />
       </Drawer>
     </>
   );
