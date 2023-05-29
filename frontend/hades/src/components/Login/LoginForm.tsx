@@ -20,7 +20,7 @@ export const LoginForm: React.FC = () => {
         setToken(response);
       })
       .catch((error: ErrorResponse) => setError(error.response.data));
-  }
+  };
 
   return (
     <FormCard

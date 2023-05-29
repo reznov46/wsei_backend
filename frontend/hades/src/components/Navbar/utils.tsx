@@ -18,5 +18,5 @@ export const navbarList = [
   { text: 'Register', link: routeBuilder.register, icon: <LoginIcon /> },
   { text: 'Details', link: routeBuilder.details, icon: <DetailsIcon /> },
   { text: 'Users', link: routeBuilder.users, icon: <PeopleIcon /> },
-  { text: 'Logout', link: routeBuilder.logout, icon: <LogoutIcon /> }
+  { text: 'Logout', link: routeBuilder.login, icon: <LogoutIcon /> }
 ] as Array<NavbarList>
