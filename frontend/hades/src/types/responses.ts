@@ -8,12 +8,17 @@ export type ErrorResponse = {
 
 export type LoginResponse = {
   data: {
-    token: string
+    token: string;
   };
 };
 
 export interface UserDetailsResponse {
   data: {
-    user: UserDetails
+    user: UserDetails;
   };
-};
+}
+export interface UsersResponse {
+  data: {
+    users: UserDetails[];
+  };
+}
