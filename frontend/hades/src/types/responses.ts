@@ -1,19 +1,24 @@
 import { UserDetails } from './user';
 
 export type ErrorResponse = {
-  response: {
-    data: string;
-  };
+	response: {
+		data: string;
+	};
 };
 
 export type LoginResponse = {
-  data: {
-    token: string
-  };
+	data: {
+		token: string;
+	};
 };
 
 export interface UserDetailsResponse {
-  data: {
-    user: UserDetails
-  };
-};
+	data: {
+		user: UserDetails;
+	};
+}
+export interface UsersResponse {
+	data: {
+		users: UserDetails[];
+	};
+}
