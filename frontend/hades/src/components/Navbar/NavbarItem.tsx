@@ -13,6 +13,7 @@ interface NavbarItemProps {
   icon: ReactNode,
   text: string;
   link: string;
+  handleOnClick?: () => void;
 }
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({
@@ -20,6 +21,7 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
   icon,
   text,
   link,
+  handleOnClick
 }) => (
   <Tooltip
     title={text}
@@ -27,7 +29,7 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
     disableInteractive
   >
     <Link to={link}>
-      <ListItem disablePadding>
+      <ListItem disablePadding onClick={handleOnClick}>
         <ListItemButton>
           <ListItemIcon
             sx={{
