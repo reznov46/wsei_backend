@@ -8,22 +8,23 @@ import { emptyCurrentUser } from "../utils/emptyUser";
 import { useGetToken } from "./useGetToken";
 
 export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const [currentUser, setCurrentUser] = useState<UserDetails>(emptyCurrentUser);
   const { token } = useGetToken();
 
   useEffect(() => {
-    setIsLoading(true);
-    axios.post(endpoints.verify, { token })
-      .then((response: UserDetailsResponse) => {
-        setCurrentUser(response.data.user);
-        setIsLoading(false);
-      })
-      .catch((error: ErrorResponse) => {
-        setError(error.response.data);
-        setIsLoading(false);
-      });
+    if (token?.length) {
+      axios.post(endpoints.verify, { token })
+        .then((response: UserDetailsResponse) => {
+          setCurrentUser(response.data.user);
+          setIsLoading(false);
+        })
+        .catch((error: ErrorResponse) => {
+          setError(error.response.data);
+          setIsLoading(false);
+        });
+    };
   }, [token]);
 
   return {
