@@ -1,8 +1,12 @@
 import React from 'react';
+import { Grid } from '@mui/material';
 import { useGetUsers } from '../../hooks/useGetUsers';
 import { routeBuilder } from '../../routes/routes';
+import { usersStyles } from '../../styles/users';
+import { UserLevel } from '../../types/user';
 import { ErrorComponent } from '../ErrorComponent/ErrorComponent';
 import { Loader } from '../Loader/Loader';
+import { UserColumn } from './UserColumn';
 
 export const Users: React.FC = () => {
   const { data, loading, error } = useGetUsers();
@@ -20,23 +24,22 @@ export const Users: React.FC = () => {
     )
   };
 
+  const users = data.filter((u) => u.level === UserLevel.user);
+  const admins = data.filter((u) => u.level === UserLevel.admin);
+
   return (
-    <>
-      <div>
-        <h2>users:</h2>
-        {data.map((user) => (
-          <div key={user.id}>
-            <p>username: {user.username}</p>
-            <p>level: {user.level}</p>
-            <p>id: {user.id}</p>
-            <p>
-              createdAt:{' '}
-              {new Date(user.createdAt).toLocaleDateString('pl-PL')}
-            </p>
-            <p>-----------------</p>
-          </div>
-        ))}
-      </div>
-    </>
+    <Grid container >
+      <Grid item xs={12} style={usersStyles.header}>
+        <h1>Users</h1>
+      </Grid>
+      <Grid item xs={6} style={usersStyles.subHeader}>
+        <h2>Simply Users</h2>
+      </Grid>
+      <Grid item xs={6} style={usersStyles.subHeader}>
+        <h2>Admins</h2>
+      </Grid>
+      <UserColumn users={users} />
+      <UserColumn users={admins} />
+    </Grid>
   );
 };

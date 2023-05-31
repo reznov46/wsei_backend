@@ -24,6 +24,7 @@ export const RegisterForm: React.FC = () => {
       user={user}
       error={error}
       setUser={setUser}
+      header='Register'
     />
   )
 }
