@@ -28,6 +28,7 @@ export const LoginForm: React.FC = () => {
       user={user}
       setUser={setUser}
       error={error}
+      header='Login'
     />
   )
 }
