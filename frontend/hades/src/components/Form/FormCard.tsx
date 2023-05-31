@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import { User } from '../../types/user';
+import { appStyles } from '../../styles/app';
 
 interface FormCardProps {
   user: User;
@@ -28,12 +29,7 @@ export const FormCard: React.FC<FormCardProps> = ({
   <Box component='form'>
     <Card>
       <CardContent>
-        <Typography
-          gutterBottom
-          variant="h5"
-        >
-          {header}
-        </Typography>
+        <h2>{header}</h2>
         <div>
           <TextField
             label="Username"
@@ -60,7 +56,11 @@ export const FormCard: React.FC<FormCardProps> = ({
           />
         </div>
         {Boolean(error) && (
-          <Typography color='error' mt={1} fontSize={14}>
+          <Typography
+            {...appStyles.text}
+            mt={1}
+            color='error'
+          >
             {error}
           </Typography>
         )}
@@ -74,5 +74,5 @@ export const FormCard: React.FC<FormCardProps> = ({
         </Button>
       </CardActions>
     </Card>
-  </Box>
+  </Box >
 );
