@@ -1,5 +1,7 @@
 import React from 'react';
 import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
+import { ErrorComponent } from '../ErrorComponent/ErrorComponent';
+import { Loader } from '../Loader/Loader';
 
 export const UserDetails: React.FC = () => {
   const { data, loading, error } = useGetCurrentUserDetails();
@@ -11,11 +13,11 @@ export const UserDetails: React.FC = () => {
   } = data;
 
   if (loading) {
-    return <>loading</>
+    return <Loader />
   }
 
   if (error) {
-    return <>{error}</>
+    return <ErrorComponent text={error} />
   }
 
   return (
