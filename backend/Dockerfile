@@ -1,0 +1,7 @@
+FROM node:16
+WORKDIR /usr/src/app/common
+
+
+COPY ./common ./
+RUN npm install
+RUN npx tsc

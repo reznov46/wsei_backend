@@ -1,0 +1,57 @@
+version: "3.8"
+services:
+  pma:
+    image: "phpmyadmin"
+    environment:
+      - PMA_PORT=3306
+      - PMA_HOST=10.0.0.3
+    ports:
+      - "8081:80"
+    logging:
+      driver: "none"
+    depends_on:
+      - database
+    networks:
+      network:
+        ipv4_address: 10.0.0.2
+  database:
+    build: "./backend/database"
+    env_file:
+      - "./backend/database/.env"
+    environment:
+      - MYSQL_ROOT_HOST=10.0.0.0/255.255.255.0
+    networks:
+      network:
+        ipv4_address: 10.0.0.3
+  cerber:
+    build: "./backend/cerber"
+    ports:
+      - "3000:3000"
+    env_file:
+      - "./backend/cerber/.env"
+      - "./backend/.env"
+    depends_on:
+      - database
+    networks:
+      network:
+        ipv4_address: 10.0.0.4
+  athena:
+    build: "./backend/athena"
+    ports:
+      - "3001:3001"
+    env_file:
+      - "./backend/athena/.env"
+      - "./backend/.env"
+    depends_on:
+      - database
+    networks:
+      network:
+        ipv4_address: 10.0.0.5
+
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+          gateway: 10.0.0.1

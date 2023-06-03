@@ -1,5 +1,5 @@
 FROM backend
-WORKDIR /usr/src/app/cerber
+WORKDIR /usr/src/app/athena
 
 COPY . .
 RUN npm i
