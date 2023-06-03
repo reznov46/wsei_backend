@@ -5,6 +5,7 @@ import {
 	DefaultResponse,
 	Logger,
 	InternalErrorDefaultResponse,
+	NotFoundDefaultResponse,
 } from 'common';
 import { Express, Request } from 'express';
 import { UserLevelComparable } from '../../models/user';
@@ -19,7 +20,8 @@ class UsersController {
 	private readonly logger = new Logger('UsersController');
 
 	public register(app: Express): void {
-		app.get('/users', defaultRouteWrapper(this.handleGetUsers));
+		app.get('/users', defaultRouteWrapper(this.handleGetUsers.bind(this)));
+		app.get('/users/:id', defaultRouteWrapper(this.handleGetUser.bind(this)));
 
 		this.logger.info('Registered.');
 	}
@@ -54,6 +56,44 @@ class UsersController {
 		}
 
 		return new OkDefaultResponse({ users });
+	}
+
+	private async handleGetUser(req: Request): Promise<DefaultResponse> {
+		const tokenResult = await this.authService.verifyTokenPayload(req.tokenPayload);
+		if (tokenResult.error != null) {
+			return new ForbiddenDefaultResponse('Token is invalid!');
+		}
+
+		const user = tokenResult.result;
+		if (user == null) {
+			this.logger.error('handleGetUser, user is null!');
+			return new InternalErrorDefaultResponse();
+		}
+
+		const userId = req.params.id;
+		if (userId == null) {
+			this.logger.error('handleGetUser, userId is null!');
+			return new InternalErrorDefaultResponse();
+		}
+
+		if (user.id != userId && user.levelComparable < UserLevelComparable.admin) {
+			this.logger.warning('handleGetUser, user is not admin!');
+			return new ForbiddenDefaultResponse('You are not allowed to do this!');
+		}
+
+		const userResult = await this.usersService.getUserById(userId);
+		if (userResult.error != null) {
+			this.logger.error('handleGetUser, cannot fetch user!');
+			return new NotFoundDefaultResponse('Cannot find user!');
+		}
+
+		const result = userResult.result;
+		if (result == null) {
+			this.logger.error('handleGetUser, user is null!');
+			return new InternalErrorDefaultResponse();
+		}
+
+		return new OkDefaultResponse(user);
 	}
 }
 
