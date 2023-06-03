@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { User } from '../../types/user';
 import { appStyles } from '../../styles/app';
+import { formStyles } from '../../styles/formCard';
 
 interface FormCardProps {
   user: User;
@@ -60,7 +61,9 @@ export const FormCard: React.FC<FormCardProps> = ({
           />
         </div>
         {Boolean(error) && (
-          <Typography {...appStyles.text} mt={1} color="error">
+          <Typography
+            {...formStyles.error}
+          >
             {error}
           </Typography>
         )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { navbarStyles } from '../../styles/navbar';
 import { LoginSectionProps } from '../../types/navbar';
 import { removeToken } from '../../utils/token/removeToken';
 import { NavbarItem } from './NavbarItem';
@@ -8,7 +9,7 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
   isUserLogged,
   open
 }) => (
-  <div style={{ marginTop: 'auto' }}>
+  <div style={navbarStyles.loginSection}>
     {!isUserLogged ?
       loginPanel.slice(0, 2).map((item, index) => (
         <div key={item.text + index}>

@@ -13,4 +13,8 @@ export const usersStyles = {
   button: {
     marginRight: '10px',
   },
+  card: {
+    padding: '8px',
+    maxWidth: '100%',
+  },
 };

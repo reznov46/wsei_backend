@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { NavbarItemProps } from '../../types/navbar';
+import { navbarStyles } from '../../styles/navbar';
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({
   open,
@@ -27,17 +28,15 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
           <ListItemButton>
             <ListItemIcon
               sx={{
-                minWidth: 0,
                 mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-                marginTop: 1
+                ...navbarStyles.listItemIcon
               }}
             >
               {icon}
             </ListItemIcon>
             <Typography
               sx={{ opacity: open ? 1 : 0 }}
-              style={{ width: '100%' }}>
+            >
               {text}
             </Typography>
           </ListItemButton>

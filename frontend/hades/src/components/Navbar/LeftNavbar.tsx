@@ -32,7 +32,10 @@ export const LeftNavbar: React.FC = () => {
         open={open}
         handleDrawerOpen={handleDrawerOpen}
       />
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        open={open}
+        variant='permanent'
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
