@@ -7,10 +7,10 @@ import {
 } from '@mui/material';
 import { UserDetails } from '../../types/user';
 import { convertDate } from '../../utils/convertDate';
-import { usersStyles } from '../../styles/users';
+import { usersListStyles } from '../../styles/usersList';
 
 export const UserItem: React.FC<{ user: UserDetails }> = ({ user }) => (
-  <Card elevation={8} style={usersStyles.card}>
+  <Card elevation={8} style={usersListStyles.card}>
     <ListItemAvatar>
       <Avatar alt={user.username.toUpperCase()} src=" " />
     </ListItemAvatar>
@@ -19,7 +19,7 @@ export const UserItem: React.FC<{ user: UserDetails }> = ({ user }) => (
       secondary={
         <>
           <span>{`Created at: ${convertDate(user.createdAt)}`}</span>
-          <span style={usersStyles.id}>{`ID: ${user.id}`}</span>
+          <span style={usersListStyles.id}>{`ID: ${user.id}`}</span>
         </>
       }
     />

@@ -1,4 +1,4 @@
-export const usersStyles = {
+export const usersListStyles = {
   header: {
     display: 'flex',
     justifyContent: 'center',

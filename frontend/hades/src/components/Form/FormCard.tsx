@@ -9,7 +9,6 @@ import {
   Typography,
 } from '@mui/material';
 import { User } from '../../types/user';
-import { appStyles } from '../../styles/app';
 import { formStyles } from '../../styles/formCard';
 
 interface FormCardProps {

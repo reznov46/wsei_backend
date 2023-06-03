@@ -1,3 +1,9 @@
 export const appStyles = {
-  display: 'flex',
+  box: {
+    display: 'flex',
+  },
+  navigator: {
+    margin: '16px',
+    flex: 1,
+  }
 };

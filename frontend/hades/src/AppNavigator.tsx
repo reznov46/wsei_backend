@@ -5,9 +5,10 @@ import { LoginForm } from './components/Login/LoginForm';
 import { RegisterForm } from './components/Register/RegisterForm';
 import { UserDetails } from './components/UserDetails/UserDetails';
 import { UsersList } from './components/UsersList/UsersList';
+import { appStyles } from './styles/app';
 
 export const AppNavigator: React.FC = () => (
-  <div style={{ margin: '16px', flex: 1 }}>
+  <div style={appStyles.navigator}>
     <Switch>
       <Route path={routeBuilder.home} children={'initial'} exact />
       <Route path={routeBuilder.login} component={LoginForm} exact />
