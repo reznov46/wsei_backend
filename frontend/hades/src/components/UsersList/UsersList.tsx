@@ -4,11 +4,11 @@ import { useGetUsers } from '../../hooks/useGetUsers';
 import { routeBuilder } from '../../routes/routes';
 import { usersStyles } from '../../styles/users';
 import { UserLevel } from '../../types/user';
-import { ErrorComponent } from '../ErrorComponent/ErrorComponent';
-import { Loader } from '../Loader/Loader';
+import { ErrorComponent } from '../Common/ErrorComponent';
+import { Loader } from '../Common/Loader';
 import { UserColumn } from './UserColumn';
 
-export const Users: React.FC = () => {
+export const UsersList: React.FC = () => {
   const { data, loading, error } = useGetUsers();
 
   if (loading) {
