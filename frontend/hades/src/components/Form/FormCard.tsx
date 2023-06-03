@@ -14,9 +14,9 @@ import { appStyles } from '../../styles/app';
 interface FormCardProps {
   user: User;
   error: string;
-  handleSubmit: () => Promise<void>;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
   setUser: (user: User) => void;
-  header: string,
+  header: string;
 }
 
 export const FormCard: React.FC<FormCardProps> = ({
@@ -26,7 +26,7 @@ export const FormCard: React.FC<FormCardProps> = ({
   setUser,
   header,
 }) => (
-  <Box component='form'>
+  <Box component="form" onSubmit={handleSubmit}>
     <Card>
       <CardContent>
         <h2>{header}</h2>
@@ -34,45 +34,42 @@ export const FormCard: React.FC<FormCardProps> = ({
           <TextField
             label="Username"
             variant="standard"
-            autoComplete='username'
+            autoComplete="username"
             value={user.username}
-            onChange={(evt) => setUser({
-              username: evt.target.value,
-              password: user.password
-            })}
+            onChange={(evt) =>
+              setUser({
+                username: evt.target.value,
+                password: user.password,
+              })
+            }
           />
         </div>
         <div>
           <TextField
             label="Password"
             variant="standard"
-            type='password'
-            autoComplete='password'
+            type="password"
+            autoComplete="password"
             value={user.password}
-            onChange={(evt) => setUser({
-              username: user.username,
-              password: evt.target.value
-            })}
+            onChange={(evt) =>
+              setUser({
+                username: user.username,
+                password: evt.target.value,
+              })
+            }
           />
         </div>
         {Boolean(error) && (
-          <Typography
-            {...appStyles.text}
-            mt={1}
-            color='error'
-          >
+          <Typography {...appStyles.text} mt={1} color="error">
             {error}
           </Typography>
         )}
       </CardContent>
       <CardActions>
-        <Button
-          size="small"
-          onClick={handleSubmit}
-        >
+        <Button size="small" type="submit">
           {header}
         </Button>
       </CardActions>
     </Card>
-  </Box >
+  </Box>
 );

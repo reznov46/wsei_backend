@@ -13,8 +13,12 @@ export const LoginForm: React.FC = () => {
   const [error, setError] = useState<string>('');
   const history = useHistory();
 
-  const handleSubmit = async () => {
-    await axios.post(endpoints.login, user)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    await axios
+      .post(endpoints.login, user)
       .then((response: LoginResponse) => {
         history.push(routeBuilder.details);
         setToken(response);
@@ -28,7 +32,7 @@ export const LoginForm: React.FC = () => {
       user={user}
       setUser={setUser}
       error={error}
-      header='Login'
+      header="Login"
     />
-  )
-}
+  );
+};

@@ -14,7 +14,6 @@ export const routeBuilder = {
   details: '/details',
   home: '/',
   login: '/login',
-  logout: '/logout',
   noPage: '*',
   register: '/register',
   users: '/users',

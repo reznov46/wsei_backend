@@ -13,22 +13,17 @@ export const Users: React.FC = () => {
 
   if (loading) {
     return <Loader />;
-  };
+  }
 
   if (error) {
-    return (
-      <ErrorComponent
-        text={error}
-        link={routeBuilder.home}
-      />
-    )
-  };
+    return <ErrorComponent text={error} link={routeBuilder.home} />;
+  }
 
   const users = data.filter((u) => u.level === UserLevel.user);
   const admins = data.filter((u) => u.level === UserLevel.admin);
 
   return (
-    <Grid container >
+    <Grid container>
       <Grid item xs={12} style={usersStyles.header}>
         <h1>Users</h1>
       </Grid>
