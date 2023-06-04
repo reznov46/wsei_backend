@@ -26,8 +26,8 @@ class MysqlDatabaseManager implements DatabaseManager {
 
 		let tries = 0;
 		while (!(await this.connect(connection))) {
-			this.logger.warning('init, cannot connect, retrying in 500ms!');
-			await delay(2000);
+			this.logger.warning('init, cannot connect, retrying in 5s!');
+			await delay(5000);
 
 			if (tries++ > 10) {
 				this.logger.error('init, more that 10 retries failed!');
