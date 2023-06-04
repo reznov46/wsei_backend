@@ -16,7 +16,11 @@ export const UsersList: React.FC = () => {
   }
 
   if (error) {
-    return <ErrorComponent text={error} link={routeBuilder.home} />;
+    return (
+      <ErrorComponent
+        text={error}
+        link={routeBuilder.home} />
+    );
   }
 
   const users = data.filter((u) => u.level === UserLevel.user);

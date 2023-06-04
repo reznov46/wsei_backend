@@ -5,5 +5,5 @@ export const appStyles = {
   navigator: {
     margin: '16px',
     flex: 1,
-  }
+  },
 };

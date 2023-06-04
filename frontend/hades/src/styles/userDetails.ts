@@ -1,4 +1,4 @@
-import { FONT_FAMILY, MARGIN_TOP_CONTENT } from "../utils/consts";
+import { FONT_FAMILY, MARGIN_TOP_CONTENT } from '../utils/consts';
 
 export const userDetailsStyles = {
   div: {
@@ -26,12 +26,12 @@ export const userDetailsStyles = {
   },
   detailsDiv: {
     width: '100%',
-    marginTop: '15px'
+    marginTop: '15px',
   },
   level: {
     display: 'flex',
   },
   button: {
-    marginLeft: 'auto'
-  }
+    marginLeft: 'auto',
+  },
 };

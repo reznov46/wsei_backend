@@ -1,4 +1,4 @@
-import { FONT_FAMILY, MARGIN_TOP_CONTENT } from "../utils/consts";
+import { FONT_FAMILY, MARGIN_TOP_CONTENT } from '../utils/consts';
 
 export const formStyles = {
   div: {
@@ -16,7 +16,7 @@ export const formStyles = {
     justifyContent: 'center',
   },
   input: {
-    width: '100%'
+    width: '100%',
   },
   error: {
     display: 'flex',
@@ -27,6 +27,6 @@ export const formStyles = {
     color: 'error',
   },
   button: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
   },
 };

@@ -1,9 +1,9 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { endpoints } from "../routes/routes";
-import { FetchedData } from "../types/fetchedData";
-import { ErrorResponse, UsersResponse } from "../types/responses";
-import { UserDetails } from "../types/user";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { endpoints } from '../routes/routes';
+import { FetchedData } from '../types/fetchedData';
+import { ErrorResponse, UsersResponse } from '../types/responses';
+import { UserDetails } from '../types/user';
 
 export const useGetUsers = (): FetchedData<UserDetails[]> => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -23,12 +23,12 @@ export const useGetUsers = (): FetchedData<UserDetails[]> => {
       .catch((error: ErrorResponse) => {
         setError(error.response.data);
         setIsLoading(false);
-      })
+      });
   }, []);
 
   return {
     data: users,
     loading: isLoading,
     error,
-  }
+  };
 };

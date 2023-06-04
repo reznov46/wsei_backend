@@ -5,11 +5,11 @@ export const emptyUser = {
   password: '',
   id: '',
   jwt: '',
-} as User
+} as User;
 
 export const emptyCurrentUser = {
   id: '',
   username: '',
   level: '',
   createdAt: '',
-} as UserDetails
+} as UserDetails;
