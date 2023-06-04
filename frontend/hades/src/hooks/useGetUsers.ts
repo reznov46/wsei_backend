@@ -14,7 +14,7 @@ export const useGetUsers = (): FetchedData<UserDetails[]> => {
     axios
       .get(endpoints.users, {
         withCredentials: true,
-      })vvcccbctlgffk
+      })
       .then((response: UsersResponse) => {
         const { users } = response.data;
         setUsers(users);
