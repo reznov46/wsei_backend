@@ -15,6 +15,7 @@ import { Loader } from '../Common/Loader';
 import { userDetailsStyles } from '../../styles/userDetails';
 import { useHistory } from 'react-router';
 import { routeBuilder } from '../../routes/routes';
+import { FONT_FAMILY } from '../../utils/consts';
 
 export const UserDetails: React.FC = () => {
   const history = useHistory();
@@ -50,14 +51,14 @@ export const UserDetails: React.FC = () => {
           />
           <Typography
             variant="h4"
-            fontFamily='Gill Sans'
+            fontFamily={FONT_FAMILY}
           >
             {username}
           </Typography>
           <Typography
             color="text.secondary"
             variant="h6"
-            fontFamily='Gill Sans'
+            fontFamily={FONT_FAMILY}
             style={userDetailsStyles.level}
           >
             <b>Level:{' '}</b>{level}
@@ -65,13 +66,13 @@ export const UserDetails: React.FC = () => {
           <div style={userDetailsStyles.detailsDiv}>
             <Typography
               variant="body2"
-              fontFamily='Gill Sans'
+              fontFamily={FONT_FAMILY}
             >
               <b>ID:{' '}</b>{id}
             </Typography>
             <Typography
               variant="body2"
-              fontFamily='Gill Sans'
+              fontFamily={FONT_FAMILY}
             >
               <b>Created at:{' '}</b>{convertDate(createdAt)}
             </Typography>
@@ -79,10 +80,10 @@ export const UserDetails: React.FC = () => {
         </CardContent>
         <CardActions>
           <Button
-            onClick={() => history.goBack()}
+            onClick={() => history.push(routeBuilder.home)}
             style={userDetailsStyles.button}
           >
-            Back
+            Home
           </Button>
         </CardActions>
       </Card>

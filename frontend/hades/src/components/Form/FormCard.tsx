@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import { User } from '../../types/user';
 import { formStyles } from '../../styles/formCard';
+import { useHistory, useLocation } from 'react-router';
+import { routeBuilder } from '../../routes/routes';
 
 interface FormCardProps {
   user: User;
@@ -25,53 +27,72 @@ export const FormCard: React.FC<FormCardProps> = ({
   handleSubmit,
   setUser,
   header,
-}) => (
-  <Box component="form" onSubmit={handleSubmit}>
-    <Card>
-      <CardContent>
-        <h2>{header}</h2>
-        <div>
-          <TextField
-            label="Username"
-            variant="standard"
-            autoComplete="username"
-            value={user.username}
-            onChange={(evt) =>
-              setUser({
+}) => {
+  const history = useHistory();
+  const location = useLocation();
+
+  return (
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      style={formStyles.div}
+    >
+      <Card
+        style={formStyles.card}
+      >
+        <CardContent>
+          <h2 style={formStyles.header}>{header}</h2>
+          <div>
+            <TextField
+              label="Username"
+              variant="standard"
+              autoComplete="username"
+              value={user.username}
+              style={formStyles.input}
+              onChange={(evt) => setUser({
                 username: evt.target.value,
                 password: user.password,
-              })
-            }
-          />
-        </div>
-        <div>
-          <TextField
-            label="Password"
-            variant="standard"
-            type="password"
-            autoComplete="password"
-            value={user.password}
-            onChange={(evt) =>
-              setUser({
+              })} />
+          </div>
+          <div>
+            <TextField
+              label="Password"
+              variant="standard"
+              type="password"
+              autoComplete="password"
+              value={user.password}
+              style={formStyles.input}
+              onChange={(evt) => setUser({
                 username: user.username,
                 password: evt.target.value,
-              })
-            }
-          />
-        </div>
-        {Boolean(error) && (
-          <Typography
-            {...formStyles.error}
+              })} />
+          </div>
+          {Boolean(error) && (
+            <Typography
+              {...formStyles.error}
+            >
+              {error}
+            </Typography>
+          )}
+        </CardContent>
+        <CardActions>
+          {location.pathname === routeBuilder.login && (
+            <Button
+              size="medium"
+              onClick={() => history.push(routeBuilder.register)}
+            >
+              Register
+            </Button>
+          )}
+          <Button
+            size="medium"
+            type="submit"
+            style={formStyles.button}
           >
-            {error}
-          </Typography>
-        )}
-      </CardContent>
-      <CardActions>
-        <Button size="small" type="submit">
-          {header}
-        </Button>
-      </CardActions>
-    </Card>
-  </Box>
-);
+            {header}
+          </Button>
+        </CardActions>
+      </Card>
+    </Box>
+  );
+};
