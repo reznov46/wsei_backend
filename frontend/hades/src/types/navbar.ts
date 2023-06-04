@@ -1,14 +1,14 @@
 import React, { ReactNode } from 'react';
 
 export interface LoginSectionProps {
-  isUserLogged: boolean,
-  open: boolean
+  isUserLogged: boolean;
+  open: boolean;
 }
 
 export interface DefaultNavbarSection {
-  isAdmin: boolean,
-  isUserLogged: boolean,
-  open: boolean
+  isAdmin: boolean;
+  isUserLogged: boolean;
+  open: boolean;
 }
 
 export interface NavbarItemProps {
@@ -20,5 +20,5 @@ export interface NavbarItemProps {
 export interface NavbarElement {
   text: string;
   link: string;
-  icon: ReactNode
+  icon: ReactNode;
 }

@@ -1,11 +1,11 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { endpoints } from "../routes/routes";
-import { FetchedData } from "../types/fetchedData";
-import { ErrorResponse, UserDetailsResponse } from "../types/responses";
-import { UserDetails } from "../types/user";
-import { emptyCurrentUser } from "../utils/emptyUser";
-import { useGetToken } from "./useGetToken";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { endpoints } from '../routes/routes';
+import { FetchedData } from '../types/fetchedData';
+import { ErrorResponse, UserDetailsResponse } from '../types/responses';
+import { UserDetails } from '../types/user';
+import { emptyCurrentUser } from '../utils/emptyUser';
+import { useGetToken } from './useGetToken';
 
 export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -15,7 +15,8 @@ export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
 
   useEffect(() => {
     if (token?.length) {
-      axios.post(endpoints.verify, { token })
+      axios
+        .post(endpoints.verify, { token })
         .then((response: UserDetailsResponse) => {
           setCurrentUser(response.data.user);
           setIsLoading(false);
@@ -34,5 +35,5 @@ export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
     data: currentUser,
     loading: isLoading,
     error,
-  }
+  };
 };

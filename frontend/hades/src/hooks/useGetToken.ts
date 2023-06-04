@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router"
-import { TOKEN_KEY } from "../utils/consts";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { TOKEN_KEY } from '../utils/consts';
 
 export const useGetToken = () => {
   const path = useLocation().pathname;
@@ -8,7 +8,7 @@ export const useGetToken = () => {
 
   useEffect(() => {
     token = window.localStorage.getItem(TOKEN_KEY) ?? '';
-  }, [path])
+  }, [path]);
 
-  return { token }
-}
+  return { token };
+};

@@ -1,4 +1,4 @@
-import { MARGIN_TOP_CONTENT } from "../utils/consts";
+import { MARGIN_TOP_CONTENT } from '../utils/consts';
 
 export const errorStyles = {
   div: {
@@ -16,6 +16,6 @@ export const errorStyles = {
     justifyContent: 'center',
   },
   button: {
-    marginLeft: 'auto'
-  }
+    marginLeft: 'auto',
+  },
 };

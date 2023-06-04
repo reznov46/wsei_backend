@@ -1,4 +1,3 @@
-import { TOKEN_KEY } from "../consts";
+import { TOKEN_KEY } from '../consts';
 
-export const removeToken = () =>
-  window.localStorage.removeItem(TOKEN_KEY);
+export const removeToken = () => window.localStorage.removeItem(TOKEN_KEY);
