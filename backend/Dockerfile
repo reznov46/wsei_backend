@@ -3,5 +3,5 @@ WORKDIR /usr/src/app/common
 
 
 COPY ./common ./
-RUN npm install
+RUN npm i
 RUN npx tsc

@@ -1,7 +1,7 @@
 import { Route } from '../types/route';
 
 const DEFAULT_BACKEND_HOST =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '';
 
 export const endpoints = {
   login: `${DEFAULT_BACKEND_HOST}/login`,
