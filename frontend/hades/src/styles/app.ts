@@ -1,7 +1,9 @@
 export const appStyles = {
-  display: 'flex',
-  text: {
-    fontSize: 14,
-    fontFamily: 'Gill Sans'
+  box: {
+    display: 'flex',
+  },
+  navigator: {
+    margin: '16px',
+    flex: 1,
   }
 };

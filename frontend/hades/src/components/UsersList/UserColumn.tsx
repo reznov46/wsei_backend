@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Grid, List } from '@mui/material';
+import { Grid, List } from '@mui/material';
 import { UserDetails } from '../../types/user';
 import { UserItem } from './UserItem';
 

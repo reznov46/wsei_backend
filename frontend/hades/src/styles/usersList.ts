@@ -1,4 +1,4 @@
-export const usersStyles = {
+export const usersListStyles = {
   header: {
     display: 'flex',
     justifyContent: 'center',
@@ -12,5 +12,9 @@ export const usersStyles = {
   },
   button: {
     marginRight: '10px',
+  },
+  card: {
+    padding: '8px',
+    maxWidth: '100%',
   },
 };

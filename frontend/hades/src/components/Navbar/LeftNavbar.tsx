@@ -7,10 +7,10 @@ import {
   Drawer,
   DrawerHeader,
   NavToolBar,
-} from '../../utils/materialUIhelpers';
+} from '../../utils/helpers/materialUIhelpers';
 import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
 import { UserLevel } from '../../types/user';
-import { isAdmin } from '../../utils/functions';
+import { isAdmin } from '../../utils/isAdmin';
 import { useGetToken } from '../../hooks/useGetToken';
 import { LoginSection } from './LoginSection';
 import { NavbarList } from './NavbarList';
@@ -32,7 +32,10 @@ export const LeftNavbar: React.FC = () => {
         open={open}
         handleDrawerOpen={handleDrawerOpen}
       />
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        open={open}
+        variant='permanent'
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />

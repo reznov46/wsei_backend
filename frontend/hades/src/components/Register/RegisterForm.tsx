@@ -12,7 +12,10 @@ export const RegisterForm: React.FC = () => {
   const [error, setError] = useState<string>('');
   const history = useHistory();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     await axios.post(endpoints.register, user)
       .then(() => history.push(routeBuilder.login))
       .catch((error: ErrorResponse) => setError(error.response.data));
