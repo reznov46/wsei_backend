@@ -28,11 +28,16 @@ export const UserDetails: React.FC = () => {
 
   if (loading) {
     return <Loader />
-  }
+  };
 
   if (error) {
-    return <ErrorComponent text={error} />
-  }
+    return (
+      <ErrorComponent
+        text={error}
+        link={routeBuilder.login}
+      />
+    )
+  };
 
   return (
     <Box component='div' style={userDetailsStyles.div}>
@@ -43,24 +48,41 @@ export const UserDetails: React.FC = () => {
             src="/"
             style={userDetailsStyles.avatar}
           />
-          <Typography variant="h5">
+          <Typography
+            variant="h4"
+            fontFamily='Gill Sans'
+          >
             {username}
           </Typography>
-          <Typography color="text.secondary">
-            Level: {level}
+          <Typography
+            color="text.secondary"
+            variant="h6"
+            fontFamily='Gill Sans'
+            style={userDetailsStyles.level}
+          >
+            <b>Level:{' '}</b>{level}
           </Typography>
-          <Typography variant="body2">
-            ID: {id}
-          </Typography>
-          <Typography variant="body2">
-            Created at: {convertDate(createdAt)}
-          </Typography>
+          <div style={userDetailsStyles.detailsDiv}>
+            <Typography
+              variant="body2"
+              fontFamily='Gill Sans'
+            >
+              <b>ID:{' '}</b>{id}
+            </Typography>
+            <Typography
+              variant="body2"
+              fontFamily='Gill Sans'
+            >
+              <b>Created at:{' '}</b>{convertDate(createdAt)}
+            </Typography>
+          </div>
         </CardContent>
         <CardActions>
           <Button
-            onClick={() => history.push(routeBuilder.home)}
+            onClick={() => history.goBack()}
+            style={userDetailsStyles.button}
           >
-            Learn More
+            Back
           </Button>
         </CardActions>
       </Card>

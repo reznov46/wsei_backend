@@ -24,7 +24,10 @@ export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
           setError(error.response.data);
           setIsLoading(false);
         });
-    };
+    } else {
+      setIsLoading(false);
+      setError('Please log in');
+    }
   }, [token]);
 
   return {
