@@ -1,4 +1,4 @@
-FROM backend
+FROM wsei_backend
 WORKDIR /usr/src/app/athena
 
 COPY . .
