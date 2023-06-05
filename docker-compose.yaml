@@ -38,6 +38,8 @@ services:
     depends_on:
       - wsei_backend
       - database
+    volumes:
+      - ./backend/cerber:/usr/src/app/cerber
     networks:
       network:
         ipv4_address: 10.0.0.4
@@ -50,6 +52,8 @@ services:
     depends_on:
       - wsei_backend
       - database
+    volumes:
+      - ./backend/athena:/usr/src/app/athena
     networks:
       network:
         ipv4_address: 10.0.0.5

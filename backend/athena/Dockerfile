@@ -5,6 +5,6 @@ COPY . .
 RUN npm i
 run npm run build
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "watch" ]
 
 EXPOSE 3000
