@@ -93,7 +93,7 @@ class UsersController {
 			return new InternalErrorDefaultResponse();
 		}
 
-		return new OkDefaultResponse(user);
+		return new OkDefaultResponse(result);
 	}
 }
 
