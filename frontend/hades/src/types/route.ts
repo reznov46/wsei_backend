@@ -5,4 +5,5 @@ export interface Route {
   noPage: string;
   register: string;
   users: string;
+  userId: string;
 }

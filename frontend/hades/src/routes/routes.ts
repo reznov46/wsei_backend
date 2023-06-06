@@ -17,4 +17,5 @@ export const routeBuilder = {
   noPage: '*',
   register: '/register',
   users: '/users',
+  userId: '/users' + '/:id',
 } as Route;

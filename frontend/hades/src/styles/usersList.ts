@@ -1,3 +1,5 @@
+import { FONT_FAMILY } from '../utils/consts';
+
 export const usersListStyles = {
   header: {
     display: 'flex',
@@ -8,7 +10,7 @@ export const usersListStyles = {
     justifyContent: 'center',
   },
   id: {
-    marginLeft: '40px',
+    marginLeft: 'auto',
   },
   button: {
     marginRight: '10px',
@@ -16,5 +18,18 @@ export const usersListStyles = {
   card: {
     padding: '8px',
     maxWidth: '100%',
+    cursor: 'pointer',
+  },
+  userItem: {
+    marginTop: '1rem',
+  },
+  avatar: {
+    display: 'inline-block',
+  },
+  description: {
+    display: 'flex',
+    justifyContent: 'end',
+    marginTop: '10px',
+    fontFamily: FONT_FAMILY,
   },
 };

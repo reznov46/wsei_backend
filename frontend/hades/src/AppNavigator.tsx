@@ -15,6 +15,8 @@ export const AppNavigator: React.FC = () => (
       <Route path={routeBuilder.register} component={RegisterForm} exact />
       <Route path={routeBuilder.details} component={UserDetails} exact />
       <Route path={routeBuilder.users} component={UsersList} exact />
+      <Route path={routeBuilder.userId} children={'id'} exact />
+      <Route path={routeBuilder.noPage} children={'noPage'} />
     </Switch>
   </div>
 );
