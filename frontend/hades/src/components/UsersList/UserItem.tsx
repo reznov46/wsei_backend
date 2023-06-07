@@ -10,11 +10,18 @@ import { UserDetails } from '../../types/user';
 import { convertDate } from '../../utils/convertDate';
 import { usersListStyles } from '../../styles/usersList';
 import { routeBuilder } from '../../routes/routes';
+import { useHistory, useLocation, useParams } from 'react-router';
 
 export const UserItem: React.FC<{ user: UserDetails }> = ({ user }) => {
-  const userRoute = routeBuilder.users
+  const history = useHistory();
+  const userRoute = `${routeBuilder.users}/${user.id}`;
+
   return (
-    <Card elevation={6} style={usersListStyles.card}>
+    <Card
+      elevation={6}
+      style={usersListStyles.card}
+      onClick={() => history.push(userRoute)}
+    >
       <CardContent>
         <ListItemAvatar style={usersListStyles.avatar}>
           <Avatar alt={user.username.toUpperCase()} src=" " />
@@ -33,7 +40,7 @@ const Description: React.FC<{ user: UserDetails }> = ({
 
   return (
     <>
-      <span>{user.username}</span>
+      <span style={usersListStyles.name}>{user.username}</span>
       <div style={{
         ...usersListStyles.description,
         color: theme.palette.grey[500]

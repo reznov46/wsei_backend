@@ -22,3 +22,7 @@ export interface UsersResponse {
     users: UserDetails[];
   };
 }
+
+export interface UserByIdResponse {
+  data: UserDetails;
+}

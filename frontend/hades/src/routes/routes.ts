@@ -8,6 +8,7 @@ export const endpoints = {
   register: `${DEFAULT_BACKEND_HOST}/register`,
   verify: `${DEFAULT_BACKEND_HOST}/verify`,
   users: `${DEFAULT_BACKEND_HOST}/users`,
+  user: (id: string) => `${DEFAULT_BACKEND_HOST}/users/${id}`,
 };
 
 export const routeBuilder = {

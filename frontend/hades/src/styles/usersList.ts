@@ -32,4 +32,7 @@ export const usersListStyles = {
     marginTop: '10px',
     fontFamily: FONT_FAMILY,
   },
+  name: {
+    fontSize: 20,
+  },
 };
