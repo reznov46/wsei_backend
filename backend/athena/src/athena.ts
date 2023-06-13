@@ -7,7 +7,8 @@ require('source-map-support').install();
 const logger = new Logger('main');
 const init = async (): Promise<void> => {
 	const databaseManager = new MysqlDatabaseManager({
-		host: process.env.DATABASE_HOST!,
+		// Override host to localhost if not running in Docker.
+		host: process.env.DOCKER ? process.env.DATABASE_HOST! : 'localhost',
 		user: process.env.DATABASE_USER!,
 		password: process.env.DATABASE_PASSWORD!,
 		database: process.env.DATABASE_DB_NAME!,
