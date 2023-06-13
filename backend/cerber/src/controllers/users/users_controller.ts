@@ -6,6 +6,7 @@ import {
 	Logger,
 	InternalErrorDefaultResponse,
 	NotFoundDefaultResponse,
+	BadRequestDefaultResponse,
 } from 'common';
 import { Express, Request } from 'express';
 import { UserLevelComparable } from '../../models/user';
@@ -22,6 +23,7 @@ class UsersController {
 	public register(app: Express): void {
 		app.get('/users', defaultRouteWrapper(this.handleGetUsers.bind(this)));
 		app.get('/users/:id', defaultRouteWrapper(this.handleGetUser.bind(this)));
+		app.get('/userByToken', defaultRouteWrapper(this.handleGetUserByToken.bind(this)));
 
 		this.logger.info('Registered.');
 	}
@@ -85,6 +87,29 @@ class UsersController {
 		}
 
 		return new OkDefaultResponse(fetchedUser);
+	}
+
+	private async handleGetUserByToken(req: Request): Promise<DefaultResponse> {
+		const { token } = req.query;
+		if (token == null) {
+			return new BadRequestDefaultResponse();
+		}
+
+		if (typeof token !== 'string') {
+			return new BadRequestDefaultResponse();
+		}
+
+		const tokenPayload = await this.authService.verify(token);
+		if (tokenPayload == null) {
+			return new ForbiddenDefaultResponse();
+		}
+
+		const user = await this.usersService.getUserById(tokenPayload.id);
+		if (user == null) {
+			return new ForbiddenDefaultResponse();
+		}
+
+		return new OkDefaultResponse(user);
 	}
 }
 
