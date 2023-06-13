@@ -11,7 +11,7 @@ import { Express, Request, Response } from 'express';
 import AuthService from '../../services/auth_service/auth_service';
 import { LoginError } from '../../services/auth_service/results/login_result';
 import { RegisterError } from '../../services/auth_service/results/register_result';
-import { VerifyError } from '../../services/auth_service/results/verify_result';
+import UsersService from '../../services/users_service/users_service';
 
 class AuthController {
 	constructor(private readonly authService: AuthService) {
@@ -110,25 +110,12 @@ class AuthController {
 			return new BadRequestDefaultResponse();
 		}
 
-		const result = await this.authService.verify(token);
-		if (result.error != null) {
-			switch (result.error) {
-				case VerifyError.cannotFetchUsers:
-					return new InternalErrorDefaultResponse('Cannot fetch the users!');
-
-				case VerifyError.tokenInvalid: {
-					return new ForbiddenDefaultResponse('Token is invalid!');
-				}
-			}
+		const tokenPayload = await this.authService.verify(token);
+		if (tokenPayload == null) {
+			return new ForbiddenDefaultResponse('Cannot verify token!');
 		}
 
-		const user = result.result;
-		if (user == null) {
-			this.logger.error('Unexpected result from verify!');
-			return new InternalErrorDefaultResponse();
-		}
-
-		return new OkDefaultResponse({ user });
+		return new OkDefaultResponse(tokenPayload);
 	}
 }
 

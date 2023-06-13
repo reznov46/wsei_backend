@@ -1,12 +1,10 @@
 import { Logger } from 'common';
 import User from '../../models/user';
-import { GetUsersError, GetUsersResult } from './results/get_users_result';
-import { GetUserError, GetUserResult } from './results/get_user_result';
 
 class UsersService {
 	private readonly logger = new Logger('UsersService');
 
-	public async getUsers(): Promise<GetUsersResult> {
+	public async getUsers(): Promise<User[] | null> {
 		const users = await User.findAll({
 			attributes: {
 				exclude: ['password'],
@@ -15,13 +13,14 @@ class UsersService {
 
 		if (!users) {
 			this.logger.error('Cannot query users!');
-			return GetUsersResult.withError(GetUsersError.cannotFetchUsers);
+
+			return null;
 		}
 
-		return GetUsersResult.withResult(users);
+		return users;
 	}
 
-	public async getUserById(id: string): Promise<GetUserResult> {
+	public async getUserById(id: string): Promise<User | null> {
 		const user = await User.findOne({
 			where: {
 				id,
@@ -32,12 +31,12 @@ class UsersService {
 		});
 
 		if (!user) {
-			this.logger.error('Cannot query user!');
+			this.logger.error('getUserById, cannot query user!');
 
-			return GetUserResult.withError(GetUserError.cannotFetchUser);
+			return null;
 		}
 
-		return GetUsersResult.withResult(user);
+		return user;
 	}
 }
 

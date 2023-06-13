@@ -2,7 +2,6 @@ import bcyrpt from 'bcryptjs';
 import User from '../../models/user';
 import { LoginError, LoginResult } from './results/login_result';
 import { RegisterError, RegisterResult } from './results/register_result';
-import { VerifyError, VerifyResult } from './results/verify_result';
 import { Logger } from 'common';
 import TokenProvider from '../../token_provider/interface/token_provider';
 import TokenPayload from '../../token_provider/models/token_payload';
@@ -53,19 +52,19 @@ class AuthService {
 	}
 
 	public async register(username: string, password: string): Promise<RegisterResult> {
-		const users = await User.findAll({
+		const sameUsernameUsers = await User.findAll({
 			where: {
 				username,
 			},
-			attributes: ['id', 'username', 'password'],
+			attributes: ['id'],
 			limit: 1,
 		});
-		if (!users) {
+		if (!sameUsernameUsers) {
 			this.logger.error('Cannot query users!');
 			return RegisterResult.withError(RegisterError.cannotFetchUsers);
 		}
 
-		if (users.length > 0) {
+		if (sameUsernameUsers.length > 0) {
 			this.logger.error('User already exists!');
 			return RegisterResult.withError(RegisterError.usernameTaken);
 		}
@@ -85,54 +84,15 @@ class AuthService {
 		return RegisterResult.withResult(result);
 	}
 
-	public async verifyTokenPayload(tokenPayload: TokenPayload): Promise<VerifyResult> {
-		if (!tokenPayload) {
-			this.logger.error('Token payload is empty!');
-			return VerifyResult.withError(VerifyError.tokenInvalid);
-		}
-
-		const { id } = tokenPayload;
-		if (!id) {
-			this.logger.error('Token has no id!');
-			return VerifyResult.withError(VerifyError.tokenInvalid);
-		}
-
-		const users = await User.findAll({
-			where: {
-				id,
-			},
-			attributes: {
-				exclude: ['password'],
-			},
-			limit: 1,
-		});
-		if (!users) {
-			this.logger.error('Cannot query users!');
-			return VerifyResult.withError(VerifyError.cannotFetchUsers);
-		}
-
-		if (users.length < 1) {
-			this.logger.error('No matching user!');
-			return VerifyResult.withError(VerifyError.tokenInvalid);
-		}
-
-		const user = users[0];
-		if (!user) {
-			this.logger.error('Cannot get the user!');
-			return VerifyResult.withError(VerifyError.cannotFetchUsers);
-		}
-
-		return VerifyResult.withResult(user);
-	}
-
-	public async verify(token: string): Promise<VerifyResult> {
+	public async verify(token: string): Promise<TokenPayload | null> {
 		const tokenPayload = await this.tokenProvider.verifyToken(token);
 		if (!tokenPayload) {
 			this.logger.error('Cannot verify token!');
-			return VerifyResult.withError(VerifyError.tokenInvalid);
+
+			return null;
 		}
 
-		return this.verifyTokenPayload(tokenPayload);
+		return tokenPayload;
 	}
 }
 
