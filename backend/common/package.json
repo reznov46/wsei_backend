@@ -2,11 +2,9 @@
 	"name": "common",
 	"version": "1.0.0",
 	"description": "",
-	"main": "dist/common.js",
+	"main": "src/common.ts",
 	"types": "src/common.d.ts",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
+	"scripts": {},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
@@ -14,13 +12,13 @@
 		"@types/chalk": "^2.2.0",
 		"@types/express": "^4.17.17",
 		"@types/moment": "^2.13.0",
-		"@types/node": "^18.15.3",
+		"@types/node": "^20.0.2",
 		"typescript": "^5.0.2"
 	},
 	"dependencies": {
 		"chalk": "4.1.2",
 		"moment": "^2.29.4",
-		"mysql2": "^2.3.0",
+		"mysql2": "^3.3.5",
 		"sequelize": "^6.30.0"
 	}
 }
