@@ -17,12 +17,12 @@ import { UserRemovePasswordInterceptor } from 'src/interceptors/userRemovePasswo
 import { UsersRemovePasswordInterceptor } from 'src/interceptors/usersRemovePassword.interceptor';
 import {
 	ApiBadRequestResponse,
+	ApiBearerAuth,
 	ApiForbiddenResponse,
 	ApiNotFoundResponse,
 	ApiOkResponse,
 	ApiOperation,
 	ApiTags,
-	ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
 @Controller()
@@ -33,6 +33,7 @@ export class UsersController {
 	@Get('users')
 	@UseGuards(AuthGuard(UserLevelComparable.admin))
 	@UseInterceptors(UsersRemovePasswordInterceptor)
+	@ApiBearerAuth()
 	@ApiOperation({ summary: 'Get all users' })
 	@ApiForbiddenResponse()
 	@ApiOkResponse()
@@ -48,6 +49,7 @@ export class UsersController {
 	@Get('users/:id')
 	@UseGuards(AuthGuard(UserLevelComparable.user))
 	@UseInterceptors(UserRemovePasswordInterceptor)
+	@ApiBearerAuth()
 	@ApiOperation({ summary: 'Get user by its id' })
 	@ApiBadRequestResponse()
 	@ApiNotFoundResponse()

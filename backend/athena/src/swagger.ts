@@ -5,8 +5,9 @@ export const registerSwagger = (app: INestApplication) => {
 	const config = new DocumentBuilder()
 		.setTitle('Athena')
 		.setDescription('Products microservice')
-		.setVersion('1.0')
+		.setVersion('1.0.0')
 		.addTag('products')
+		.addBearerAuth()
 		.build();
 
 	const document = SwaggerModule.createDocument(app, config);
