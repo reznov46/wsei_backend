@@ -2,9 +2,7 @@ import chalk from 'chalk';
 import moment from 'moment';
 
 import LoggerService from './service/logger_service';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class Logger {
 	constructor(private tag: string) {
 		this.loggerService = LoggerService.getInstance();
