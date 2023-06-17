@@ -2,8 +2,10 @@ import chalk from 'chalk';
 import moment from 'moment';
 
 import LoggerService from './service/logger_service';
+import { Injectable } from '@nestjs/common';
 
-class Logger {
+@Injectable()
+export class Logger {
 	constructor(private tag: string) {
 		this.loggerService = LoggerService.getInstance();
 	}
@@ -54,5 +56,3 @@ class Logger {
 		return `${date} ${time} [${this.tag}]`;
 	}
 }
-
-export default Logger;
