@@ -1,9 +1,9 @@
 FROM wsei_backend
-WORKDIR /usr/src/app/cerber
+WORKDIR /usr/src/app/athena
 
 COPY . .
 RUN npm i
 
 CMD [ "npm", "start" ]
 
-EXPOSE 3001
+EXPOSE 3002

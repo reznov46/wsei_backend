@@ -8,14 +8,14 @@
 
 - Port: 3001
 
-## hermes - orders and deliveries
+## Athena - products
 
 - Port: 3002
 
-## plutus - payments
+## Hermes - orders and deliveries
 
 - Port: 3003
 
-## athena - products
+## Plutus - payments
 
 - Port: 3004
