@@ -1,43 +1,21 @@
 import jwt from 'jsonwebtoken';
 import TokenPayload from '../models/token_payload';
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { TokenProvider } from '../interface/token_provider';
-import { Logger } from 'common';
+import { GetEnv, Logger } from 'common';
+import { Env } from 'src/env/model/env';
 
 @Injectable()
-class JwtTokenProvider implements TokenProvider, OnModuleInit, OnModuleDestroy {
+class JwtTokenProvider implements TokenProvider {
+	constructor(@GetEnv env: Env) {
+		this.secret = env.jwtSecret;
+		this.expirationTime = env.jwtExpirationTime;
+	}
+
 	private readonly logger = new Logger('JwtTokenProvider');
 
-	private secret: string;
-	private expirationTime: string;
-
-	onModuleInit() {
-		const secret = process.env.JWT_SECRET;
-		if (!secret) {
-			this.logger.error('onModuleInit, cannot get JWT secret!');
-
-			throw new Error('Cannot get JWT secret!');
-		}
-
-		const expirationTime = process.env.JWT_EXPIRATION_TIME;
-		if (!expirationTime) {
-			this.logger.error('onModuleInit, cannot get JWT expiration time!');
-
-			throw new Error('Cannot get JWT expiration time!');
-		}
-
-		this.secret = secret;
-		this.expirationTime = expirationTime;
-
-		this.logger.info('onModuleInit, initialized.');
-	}
-
-	onModuleDestroy() {
-		this.secret = '';
-		this.expirationTime = '';
-
-		this.logger.info('onModuleDestroy, closed.');
-	}
+	private readonly secret: string;
+	private readonly expirationTime: number;
 
 	async generateToken(payload: TokenPayload): Promise<string | null> {
 		try {
@@ -52,21 +30,6 @@ class JwtTokenProvider implements TokenProvider, OnModuleInit, OnModuleDestroy {
 	async verifyToken(token: string): Promise<TokenPayload | null> {
 		try {
 			const decoded = jwt.verify(token, this.secret);
-			if (typeof decoded !== 'object') {
-				this.logger.error('verifyToken, cannot decode token!');
-				return null;
-			}
-
-			return decoded;
-		} catch (error) {
-			this.logger.trace(`verifyToken, ${error}`);
-			return null;
-		}
-	}
-
-	getTokenPayload(token: string): TokenPayload | null {
-		try {
-			const decoded = jwt.decode(token);
 			if (typeof decoded !== 'object') {
 				this.logger.error('verifyToken, cannot decode token!');
 				return null;

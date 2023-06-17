@@ -1,29 +1,36 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { Logger, TokenExtractor, User } from 'common';
+import { ENV_PROVIDER_TOKEN, EnvModule, GetEnv, TokenExtractor, User } from 'common';
+import { Env } from './env/model/env';
+import { EnvFactory } from './env/factory/envFactory';
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({
+		EnvModule.forRoot<Env>({
 			isGlobal: true,
+			factory: new EnvFactory().build,
 		}),
-		TypeOrmModule.forRoot({
-			type: 'mysql',
-			// Override host to localhost if not running in Docker.
-			host: process.env.DOCKER ? process.env.DATABASE_HOST! : 'localhost',
-			username: process.env.DATABASE_USER!,
-			password: process.env.DATABASE_PASSWORD!,
-			database: process.env.DATABASE_DB_NAME!,
-			entities: [User],
-			// synchronize: true,
-			logging: true,
+		TypeOrmModule.forRootAsync({
+			imports: [EnvModule],
+			inject: [ENV_PROVIDER_TOKEN],
+			useFactory: (env: Env) => ({
+				type: 'mysql',
+				// Override host to localhost if not running in Docker.
+				host: process.env.DOCKER ? env.databaseHost : 'localhost',
+				username: env.databaseUser,
+				password: env.databasePassword,
+				database: env.databaseDbName,
+				entities: [User],
+				// synchronize: true,
+				logging: true,
+			}),
 		}),
 		AuthModule,
 		UsersModule,
 	],
-	providers: [Logger, TokenExtractor],
+	providers: [TokenExtractor],
 })
 export class AppModule {}

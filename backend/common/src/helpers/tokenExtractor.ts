@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { Dictionary } from 'src/common';
 
 @Injectable()
 export class TokenExtractor {
-	public extractTokenFromHeaders(headers: { [key: string]: string }): string | null {
+	public extractTokenFromHeaders(headers: Dictionary<string>): string | null {
 		const authorizationHeader = headers['authorization'];
 		if (authorizationHeader == null) {
 			return null;
