@@ -15,14 +15,27 @@ import { Token, User, UserLevelComparable } from 'common';
 import { TokenToUserPipe } from 'src/pipes/tokenToUser.pipe';
 import { UserRemovePasswordInterceptor } from 'src/interceptors/userRemovePassword.interceptor';
 import { UsersRemovePasswordInterceptor } from 'src/interceptors/usersRemovePassword.interceptor';
+import {
+	ApiBadRequestResponse,
+	ApiForbiddenResponse,
+	ApiNotFoundResponse,
+	ApiOkResponse,
+	ApiOperation,
+	ApiTags,
+	ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
 @Controller()
+@ApiTags('users')
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
 	@Get('users')
 	@UseGuards(AuthGuard(UserLevelComparable.admin))
 	@UseInterceptors(UsersRemovePasswordInterceptor)
+	@ApiOperation({ summary: 'Get all users' })
+	@ApiForbiddenResponse()
+	@ApiOkResponse()
 	async getUsers(): Promise<User[]> {
 		const users = await this.usersService.getUsers();
 		if (users == null) {
@@ -35,6 +48,11 @@ export class UsersController {
 	@Get('users/:id')
 	@UseGuards(AuthGuard(UserLevelComparable.user))
 	@UseInterceptors(UserRemovePasswordInterceptor)
+	@ApiOperation({ summary: 'Get user by its id' })
+	@ApiBadRequestResponse()
+	@ApiNotFoundResponse()
+	@ApiForbiddenResponse()
+	@ApiOkResponse()
 	async getUser(
 		@Token(TokenToUserPipe) requestUser: User,
 		@Param('id', new ParseUUIDPipe()) id: string,
@@ -53,6 +71,9 @@ export class UsersController {
 
 	@Get('user-by-token')
 	@UseInterceptors(UserRemovePasswordInterceptor)
+	@ApiOperation({ summary: 'Get user by its token' })
+	@ApiNotFoundResponse()
+	@ApiOkResponse()
 	async getUserByToken(@Query('token', TokenToUserPipe) user: User): Promise<User> {
 		if (user == null) {
 			throw new HttpException('User not found', HttpStatus.NOT_FOUND);

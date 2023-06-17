@@ -12,16 +12,16 @@ export enum UserLevelComparable {
 
 @Entity({ name: 'users' })
 export class User {
-	@PrimaryGeneratedColumn('uuid')
+	@PrimaryGeneratedColumn('uuid', { name: 'id' })
 	public id: string;
 
-	@Column({ unique: true, type: 'varchar', length: 64 })
+	@Column({ name: 'username', unique: true, type: 'varchar', length: 64 })
 	public username: string;
 
-	@Column({ type: 'varchar', length: 60 })
+	@Column({ name: 'password', type: 'char', length: 60 })
 	public password: string;
 
-	@Column({ length: 16 })
+	@Column({ name: 'level', length: 16 })
 	public level: UserLevel;
 
 	@Column({ name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
