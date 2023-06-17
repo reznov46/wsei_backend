@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TokenExtractor, User, UserLevelComparable } from 'common';
 import { TokenProvider } from 'src/auth/token_provider/interface/token_provider';
 import { Repository } from 'typeorm';
+import { Request } from 'express';
 
 export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 	class AuthGuardMixin implements CanActivate {
@@ -14,7 +15,7 @@ export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 
 		async canActivate(context: ExecutionContext): Promise<boolean> {
 			const request = context.switchToHttp().getRequest() as Request;
-			const token = this.tokenExtractor.extractTokenFromHeaders(request.headers);
+			const token = this.tokenExtractor.extractTokenFromHeaders(request.headers as { [key: string]: string });
 			if (token == null) {
 				return false;
 			}

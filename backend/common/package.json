@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "dist/common.js",
-	"types": "dist/common.d.js",
+	"types": "dist/common.d.ts",
 	"scripts": {
 		"build": "npx tsc",
 		"start": "npx tsc --watch",
