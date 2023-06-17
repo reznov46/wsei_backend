@@ -4,3 +4,4 @@ WORKDIR /usr/src/app/common
 
 COPY ./common ./
 RUN npm i
+RUN npm run build

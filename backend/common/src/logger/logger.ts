@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import LoggerService from './service/logger_service';
 
-class Logger {
+export class Logger {
 	constructor(private tag: string) {
 		this.loggerService = LoggerService.getInstance();
 	}
@@ -54,5 +54,3 @@ class Logger {
 		return `${date} ${time} [${this.tag}]`;
 	}
 }
-
-export default Logger;

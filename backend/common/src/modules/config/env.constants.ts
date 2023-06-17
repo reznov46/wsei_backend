@@ -1,0 +1,1 @@
+export const ENV_PROVIDER_TOKEN = 'ENV_PROVIDER_TOKEN';
