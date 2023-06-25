@@ -59,7 +59,7 @@ export class UsersController {
 		@Token(TokenToUserPipe) requestUser: User,
 		@Param('id', new ParseUUIDPipe()) id: string,
 	): Promise<User> {
-		if (requestUser.id != id && requestUser.levelComparable < UserLevelComparable.admin) {
+		if (requestUser.id != id && UserLevelComparable.fromUserLevel(requestUser.level) < UserLevelComparable.admin) {
 			throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
 		}
 
