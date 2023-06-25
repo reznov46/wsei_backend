@@ -23,6 +23,7 @@ export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 
 			const response = await lastValueFrom(
 				this.httpService.get<User>('user-by-token', {
+					// Todo: maybe take as a parameter, that will be injected in the constructor (the env).
 					baseURL: 'http://localhost:3001',
 					params: {
 						token,
