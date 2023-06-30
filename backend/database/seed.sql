@@ -25,4 +25,30 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`username`),
   ADD UNIQUE KEY `users_username` (`username`);
+
+use athena;
+
+
+CREATE TABLE `products` (
+  `id` varchar(36) NOT NULL,
+  `name` varchar(64) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `full_description` varchar(10000) DEFAULT NULL,
+  `price` decimal(18,2) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` varchar(36) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` varchar(36) DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+INSERT INTO `products` (`id`, `name`, `description`, `full_description`, `price`, `created_at`, `created_by`, `updated_at`, `updated_by`, `is_deleted`) VALUES
+('87959f54-a613-4282-b2d5-db20933001ff', 'Produkt usera', 'optional description', 'optional long description', 420.00, '2023-07-01 00:14:49', '13ccb720-d6c8-11ed-b3ec-47ad62198f81', NULL, NULL, 0),
+('ad2b8aa5-49b6-4532-95b2-39fd81bd75e4', 'Product admina', 'optional description', 'optional long description', 69.00, '2023-07-01 00:09:56', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', NULL, NULL, 0);
+
+
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
 COMMIT;

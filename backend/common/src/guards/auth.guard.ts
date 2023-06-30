@@ -41,7 +41,7 @@ export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 				this.logger.warning(`canActivate, level is to low!`);
 				return false;
 			}
-
+			request.user = user;
 			return true;
 		}
 	}
