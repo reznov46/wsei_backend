@@ -5,11 +5,6 @@ export enum UserLevel {
 	admin = 'admin',
 }
 
-export enum UserLevelComparable {
-	user = 1,
-	admin = 2,
-}
-
 @Entity({ name: 'users' })
 export class User {
 	@PrimaryGeneratedColumn('uuid', { name: 'id' })
@@ -29,9 +24,16 @@ export class User {
 
 	@Column({ name: 'updated_at', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
 	public readonly updatedAt: Date;
+}
 
-	public get levelComparable(): UserLevelComparable {
-		switch (this.level) {
+export enum UserLevelComparable {
+	user = 1,
+	admin = 2,
+}
+
+export namespace UserLevelComparable {
+	export function fromUserLevel(level: UserLevel): UserLevelComparable {
+		switch (level) {
 			case UserLevel.user:
 				return UserLevelComparable.user;
 

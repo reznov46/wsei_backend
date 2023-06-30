@@ -42,7 +42,7 @@ export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 				return false;
 			}
 
-			if (user.levelComparable < minimumLevel) {
+			if (UserLevelComparable.fromUserLevel(user.level) < minimumLevel) {
 				return false;
 			}
 
