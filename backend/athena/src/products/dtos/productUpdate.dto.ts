@@ -2,9 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDecimal, IsNotEmpty, IsOptional, IsString, ValidateIf } from 'class-validator';
 
 export class ProductUpdateDto {
-    @ApiProperty()
-    @IsString()
-    readonly id: string
+	@ApiProperty()
+	@IsString()
+	readonly id: string;
 
 	@ApiProperty({
 		maximum: 64,
@@ -17,14 +17,14 @@ export class ProductUpdateDto {
 		maximum: 256,
 	})
 	@IsString()
-    @IsOptional()
+	@IsOptional()
 	readonly description: string | undefined;
 
 	@ApiProperty({
 		maximum: 10000,
 	})
-    @IsString()
-    @IsOptional()
+	@IsString()
+	@IsOptional()
 	readonly fullDescription: string | undefined;
 
 	@ApiProperty()

@@ -1,0 +1,32 @@
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "user"
+}
+
+###
+
+GET http://localhost:3004/products
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzY2NiNzIwLWQ2YzgtMTFlZC1iM2VjLTQ3YWQ2MjE5OGY4MSIsImlhdCI6MTY4ODE1NzMxOCwiZXhwIjoxNjg4MjQzNzE4fQ.lj0PjzpuR4W9rInP3m0-zgcfdc0L7Ml0BMLdveulPgw
+
+
+###
+POST http://localhost:3004/products
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzY2NiNzIwLWQ2YzgtMTFlZC1iM2VjLTQ3YWQ2MjE5OGY4MSIsImlhdCI6MTY4ODE1NzMxOCwiZXhwIjoxNjg4MjQzNzE4fQ.lj0PjzpuR4W9rInP3m0-zgcfdc0L7Ml0BMLdveulPgw
+Content-Type: application/json
+
+{
+    "name": "Produkt test user",
+    "price": "20.00"
+}

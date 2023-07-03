@@ -12,14 +12,14 @@ export class ProductCreateDto {
 		maximum: 256,
 	})
 	@IsString()
-    @IsOptional()
+	@IsOptional()
 	readonly description: string | null;
 
 	@ApiProperty({
 		maximum: 10000,
 	})
-    @IsString()
-    @IsOptional()
+	@IsString()
+	@IsOptional()
 	readonly fullDescription: string | null;
 
 	@ApiProperty()
