@@ -126,4 +126,4 @@ dist
 .pnp.*
 
 .DS_Store
-elo.rest
+*.rest
