@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, UseGuards } from '@nestjs/common';
-
 import { ApiOperation } from '@nestjs/swagger';
 import { AuthGuard, GetUser, Product, User, UserLevelComparable } from 'common';
 import { ProductCreateDto } from '../dtos/productCreate.dto';
 import { ProductUpdateDto } from '../dtos/productUpdate.dto';
 import { ProductsService } from '../service/products.service';
 import { ProductAdminGetByUserDto } from '../dtos/productAdminGetByUser.dto';
+
 @Controller('products')
 export class ProductsController {
 	constructor(private productService: ProductsService) {}
@@ -30,11 +30,11 @@ export class ProductsController {
 		this.productService.create(body, user);
 	}
 
-	@Patch('/:id')
+	@Patch()
 	@HttpCode(204)
 	@ApiOperation({ summary: 'Updates properties on existing product' })
 	@UseGuards(AuthGuard(UserLevelComparable.user))
-	async patch(@GetUser() user: User, @Param() params: { id: string }, @Body() body: ProductUpdateDto) {
+	async patch(@GetUser() user: User, @Body() body: ProductUpdateDto) {
 		this.productService.patch(body, user);
 	}
 
