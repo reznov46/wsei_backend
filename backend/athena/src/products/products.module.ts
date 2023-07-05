@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ProductsController } from './products.controller';
-import { ProductsService } from './products.service';
-import { CommonAuthModule } from 'common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CommonAuthModule, Product, TokenExtractor } from 'common';
+import { ProductsController } from './controller/products.controller';
+import { ProductsService } from './service/products.service';
 
 @Module({
-	imports: [CommonAuthModule],
+	imports: [TypeOrmModule.forFeature([Product]), CommonAuthModule],
 	controllers: [ProductsController],
-	providers: [ProductsService],
+	providers: [ProductsService, TokenExtractor],
 })
 export class ProductsModule {}

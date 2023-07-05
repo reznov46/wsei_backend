@@ -1,4 +1,5 @@
 export * from './decorators/token.decorator';
+export * from './decorators/getUser.decorator'
 export * from './guards/auth.guard';
 export * from './helpers/tokenExtractor';
 export * from './logger/logger';
