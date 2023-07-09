@@ -53,7 +53,7 @@ services:
       - wsei_backend
       - database
     ports:
-      - "3004:3004"
+      - "3002:3002"
     networks:
       - inet
     hostname: "athena"

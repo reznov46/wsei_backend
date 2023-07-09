@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable, mixin } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
-import { User, UserLevel, UserLevelComparable } from '../models/user';
+import { User, UserLevelComparable } from '../models/user';
 import { TokenExtractor } from '../helpers/tokenExtractor';
 import { Logger } from '../logger/logger';
 
@@ -24,7 +24,7 @@ export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 			const response = await lastValueFrom(
 				this.httpService.get<User>('user-by-token', {
 					// Todo: maybe take as a parameter, that will be injected in the constructor (the env).
-					baseURL: 'http://localhost:3001',
+					baseURL: 'http://cerber:3001',
 					params: {
 						token,
 					},
