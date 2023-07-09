@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+	Column,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	PrimaryGeneratedColumn
+} from 'typeorm';
+import { ProductCategory } from './productCategory';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -20,12 +27,16 @@ export class Product {
 	@Column({ name: 'price', type: 'decimal', precision: 18, scale: 2 })
 	public price: number;
 
+	@ManyToOne(() => ProductCategory, (productCategory: ProductCategory) => productCategory.products)
+	@JoinColumn({name: "product_category_id"})
+	public productCategory: ProductCategory;
+
 	@Column({ name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
 	public readonly createdAt: Date;
 
 	@Column({ name: 'created_by', type: 'uuid' })
 	public readonly createdBy: string;
-	
+
 	@Column({ name: 'is_deleted', type: 'boolean', default: () => '0' })
 	public isDeleted?: boolean;
 }

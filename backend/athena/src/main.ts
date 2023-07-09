@@ -12,7 +12,7 @@ async function bootstrap() {
 	app.useGlobalPipes(new ValidationPipe());
 
 	const env: Env = app.get(ENV_PROVIDER_TOKEN);
-	app.enableCors({ origin: env.frontendAddress, credentials: true})
+	app.enableCors({ origin: env.frontendAddress, credentials: true });
 
 	await app.listen(env.port);
 }
