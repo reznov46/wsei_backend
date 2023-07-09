@@ -53,6 +53,12 @@ export class EnvFactory {
 			return null;
 		}
 
+		const frontendAddress = env['FRONTEND_ADDRESS'];
+		if (frontendAddress == null) {
+			this.logger.error('build, front end address is null!');
+			return null;
+		}
+
 		return Object.freeze({
 			port: portParsed,
 			databaseHost,
@@ -60,6 +66,7 @@ export class EnvFactory {
 			databaseDbName,
 			databaseUser,
 			databasePassword,
+			frontendAddress,
 		});
 	}
 }
