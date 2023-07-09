@@ -23,7 +23,7 @@ export const useGetUserById = ({
     if (token?.length) {
       axios
         .get(endpoints.user(id), {
-          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response: UserByIdResponse) => {
           setUser(response.data);
