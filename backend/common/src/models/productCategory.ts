@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Product } from './product';
 
 @Entity({ name: 'productCategories' })
 export class ProductCategory {
@@ -19,4 +20,8 @@ export class ProductCategory {
 	
 	@Column({ name: 'is_deleted', type: 'boolean', default: () => '0' })
 	public isDeleted?: boolean;
+
+	@OneToMany(() => Product, (product) => product.productCategory)
+	@JoinColumn({name: "product_category_id"})
+	products?: Product[]
 }
