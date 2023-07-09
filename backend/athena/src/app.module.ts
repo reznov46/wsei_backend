@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ENV_PROVIDER_TOKEN, EnvModule, Product, TokenExtractor } from 'common';
+import { ENV_PROVIDER_TOKEN, EnvModule, Product, ProductCategory, TokenExtractor } from 'common';
 import { EnvFactory } from './env/factory/envFactory';
 import { Env } from './env/model/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -22,13 +22,13 @@ import { ProductCategoriesModule } from './productCategories/productCategories.m
 				username: env.databaseUser,
 				password: env.databasePassword,
 				database: env.databaseDbName,
-				entities: [Product],
+				entities: [Product, ProductCategory],
 				// synchronize: true,
 				logging: true,
 			}),
 		}),
 		ProductsModule,
-		ProductCategoriesModule
+		ProductCategoriesModule,
 	],
 	controllers: [],
 	providers: [TokenExtractor],

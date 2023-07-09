@@ -25,4 +25,11 @@ export class ProductCreateDto {
 	@ApiProperty()
 	@IsDecimal()
 	readonly price: number;
+
+	@ApiProperty(
+		{maximum: 36, minimum: 36}
+	)
+	@IsString()
+	readonly productCategoryId: string;
+
 }
