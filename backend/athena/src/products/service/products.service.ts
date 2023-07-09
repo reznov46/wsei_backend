@@ -28,7 +28,7 @@ export class ProductsService {
 		const newProduct: Product = {
 			name,
 			price,
-			productCategory: Object.assign(new ProductCategory(), {id: productCategoryId}),
+			productCategory: Object.assign(new ProductCategory(), { id: productCategoryId }),
 			createdAt: new Date(),
 			createdBy: id,
 			isDeleted: false,

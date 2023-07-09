@@ -12,16 +12,19 @@ export class ProductCategoriesService {
 	) {}
 
 	public async get(): Promise<Partial<ProductCategory[]> | null> {
-		return await this.productCategoriesRepository.find({where: {isDeleted: false}, select: ['id', 'name', 'description'] });
+		return await this.productCategoriesRepository.find({
+			where: { isDeleted: false },
+			select: ['id', 'name', 'description'],
+		});
 	}
 
- 	create(body: ProductCategoryCreateDto, user: User) {
+	create(body: ProductCategoryCreateDto, user: User) {
 		const { name, description } = body;
 		const newProductCategory: ProductCategory = {
 			name,
 			createdAt: new Date(),
 			createdBy: user.id,
-			isDeleted: false
+			isDeleted: false,
 		};
 
 		if (description) {
@@ -33,27 +36,27 @@ export class ProductCategoriesService {
 	}
 
 	async update(id: string, body: ProductCategoryUpdateDto) {
-		const {name, description} = body;
-		const existringCategory = await this.productCategoriesRepository.findOneBy({id});
+		const { name, description } = body;
+		const existringCategory = await this.productCategoriesRepository.findOneBy({ id });
 
-		if(existringCategory == null) {
+		if (existringCategory == null) {
 			return null;
 		}
 
 		existringCategory.name = name ?? existringCategory.name;
 		existringCategory.description = description ?? existringCategory.description;
 
-		this.productCategoriesRepository.update({id}, existringCategory)
+		this.productCategoriesRepository.update({ id }, existringCategory);
 	}
 
 	async delete(id: string) {
 		const existringCategory = await this.productCategoriesRepository.findOneBy({ id });
 
-		if(existringCategory == null) {
+		if (existringCategory == null) {
 			return null;
 		}
 
 		existringCategory.isDeleted = true;
-		this.productCategoriesRepository.update({id}, existringCategory);
+		this.productCategoriesRepository.update({ id }, existringCategory);
 	}
 }
