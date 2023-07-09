@@ -70,6 +70,16 @@ export class EnvFactory {
 			this.logger.error('build, jwt expiration time is not a number!');
 			return null;
 		}
+		const allowedCorsAddressesString = env['ALLOWED_CORS_ADDRESSES'];
+		if(allowedCorsAddressesString == null) {
+			this.logger.error("build, allowed cors string is null")
+			return null;
+		}
+		const allowedCorsAddresses = allowedCorsAddressesString.split(", ")
+		if(allowedCorsAddresses == null) {
+			this.logger.error('build, allowed cors address are null')
+			return null;
+		}
 
 		return Object.freeze({
 			port: portParsed,
@@ -80,6 +90,7 @@ export class EnvFactory {
 			databasePassword,
 			jwtSecret,
 			jwtExpirationTime: jwtExpirationTimeParsed,
+			allowedCorsAddresses
 		});
 	}
 }

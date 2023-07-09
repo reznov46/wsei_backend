@@ -5,6 +5,7 @@ interface _Env {
 	databaseDbName: string;
 	databaseUser: string;
 	databasePassword: string;
+	frontendAddress: string
 }
 
 export type Env = Readonly<_Env>;
