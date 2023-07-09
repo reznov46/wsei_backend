@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { useParams } from 'react-router';
-import { useGetUserById } from '../../hooks/getUserById';
+import { useGetUserById } from '../../hooks/useGetUserById';
 import { routeBuilder } from '../../routes/routes';
 import { userDetailsStyles } from '../../styles/userDetails';
 import { ErrorComponent } from '../Common/ErrorComponent';

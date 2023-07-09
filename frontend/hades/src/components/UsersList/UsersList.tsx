@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { useGetUsers } from '../../hooks/useGetUsers';
 import { routeBuilder } from '../../routes/routes';
 import { usersListStyles } from '../../styles/usersList';
@@ -7,6 +7,7 @@ import { UserLevel } from '../../types/user';
 import { ErrorComponent } from '../Common/ErrorComponent';
 import { Loader } from '../Common/Loader';
 import { UserColumn } from './UserColumn';
+import { FONT_FAMILY } from '../../utils/consts';
 
 export const UsersList: React.FC = () => {
   const { data, loading, error } = useGetUsers();
@@ -29,13 +30,28 @@ export const UsersList: React.FC = () => {
   return (
     <Grid container>
       <Grid item xs={12} style={usersListStyles.header}>
-        <h1>Users</h1>
+        <Typography
+          variant="h3"
+          fontFamily={FONT_FAMILY}
+        >
+          Users
+        </Typography>
       </Grid>
       <Grid item xs={6} style={usersListStyles.subHeader}>
-        <h2>Simply Users</h2>
+        <Typography
+          variant="h4"
+          fontFamily={FONT_FAMILY}
+        >
+          Simply Users
+        </Typography>
       </Grid>
       <Grid item xs={6} style={usersListStyles.subHeader}>
-        <h2>Admins</h2>
+        <Typography
+          variant="h4"
+          fontFamily={FONT_FAMILY}
+        >
+          Admins
+        </Typography>
       </Grid>
       <UserColumn users={getFilteredUsers(UserLevel.user)} />
       <UserColumn users={getFilteredUsers(UserLevel.admin)} />

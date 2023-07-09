@@ -1,4 +1,8 @@
-import { FONT_FAMILY, MARGIN_TOP_CONTENT } from '../utils/consts';
+import {
+  DEFAULT_PADDING_RIGHT,
+  FONT_FAMILY,
+  MARGIN_TOP_CONTENT,
+} from '../utils/consts';
 
 export const userDetailsStyles = {
   div: {

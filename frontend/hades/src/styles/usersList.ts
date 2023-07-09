@@ -1,13 +1,15 @@
-import { FONT_FAMILY } from '../utils/consts';
+import { DEFAULT_PADDING_RIGHT, FONT_FAMILY } from '../utils/consts';
 
 export const usersListStyles = {
   header: {
     display: 'flex',
     justifyContent: 'center',
+    paddingRight: DEFAULT_PADDING_RIGHT,
   },
   subHeader: {
     display: 'flex',
     justifyContent: 'center',
+    paddingRight: DEFAULT_PADDING_RIGHT,
   },
   id: {
     marginLeft: 'auto',
