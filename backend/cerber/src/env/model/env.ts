@@ -7,6 +7,7 @@ interface _Env {
 	databasePassword: string;
 	jwtSecret: string;
 	jwtExpirationTime: number;
+	allowedCorsAddresses: string[]
 }
 
 export type Env = Readonly<_Env>;

@@ -5,6 +5,7 @@ export * from './helpers/tokenExtractor';
 export * from './logger/logger';
 export * from './models/product';
 export * from './models/user';
+export * from './models/productCategory';
 export * from './modules/auth/commonAuth.module';
 export * from './modules/config/env.constants';
 export * from './modules/config/getEnv.decorator';

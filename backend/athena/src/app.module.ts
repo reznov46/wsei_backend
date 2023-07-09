@@ -4,6 +4,7 @@ import { EnvFactory } from './env/factory/envFactory';
 import { Env } from './env/model/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
+import { ProductCategoriesModule } from './productCategories/productCategories.module';
 
 @Module({
 	imports: [
@@ -27,6 +28,7 @@ import { ProductsModule } from './products/products.module';
 			}),
 		}),
 		ProductsModule,
+		ProductCategoriesModule
 	],
 	controllers: [],
 	providers: [TokenExtractor],
