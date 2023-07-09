@@ -16,9 +16,11 @@ export const useGetCurrentUserDetails = (): FetchedData<UserDetails> => {
   useEffect(() => {
     if (token?.length) {
       axios
-        .post(endpoints.verify, { token })
+        .get(endpoints.currentUser, {
+          params: { token },
+        })
         .then((response: UserDetailsResponse) => {
-          setCurrentUser(response.data.user);
+          setCurrentUser(response.data);
           setIsLoading(false);
         })
         .catch((error: ErrorResponse) => {

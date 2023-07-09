@@ -1,3 +1,4 @@
+import { useGetToken } from '../hooks/useGetToken';
 import { Route } from '../types/route';
 
 const DEFAULT_BACKEND_HOST =
@@ -6,7 +7,7 @@ const DEFAULT_BACKEND_HOST =
 export const endpoints = {
   login: `${DEFAULT_BACKEND_HOST}/login`,
   register: `${DEFAULT_BACKEND_HOST}/register`,
-  verify: `${DEFAULT_BACKEND_HOST}/verify`,
+  currentUser: `${DEFAULT_BACKEND_HOST}/user-by-token`,
   users: `${DEFAULT_BACKEND_HOST}/users`,
   user: (id: string) => `${DEFAULT_BACKEND_HOST}/users/${id}`,
 };

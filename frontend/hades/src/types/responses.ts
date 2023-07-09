@@ -13,14 +13,10 @@ export type LoginResponse = {
 };
 
 export interface UserDetailsResponse {
-  data: {
-    user: UserDetails;
-  };
+  data: UserDetails;
 }
 export interface UsersResponse {
-  data: {
-    users: UserDetails[];
-  };
+  data: UserDetails[];
 }
 
 export interface UserByIdResponse {

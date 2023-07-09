@@ -23,8 +23,8 @@ export const UsersList: React.FC = () => {
     );
   }
 
-  const users = data.filter((u) => u.level === UserLevel.user);
-  const admins = data.filter((u) => u.level === UserLevel.admin);
+  const getFilteredUsers = (level: UserLevel) =>
+    data.filter((u) => u.level === level)
 
   return (
     <Grid container>
@@ -37,8 +37,8 @@ export const UsersList: React.FC = () => {
       <Grid item xs={6} style={usersListStyles.subHeader}>
         <h2>Admins</h2>
       </Grid>
-      <UserColumn users={users} />
-      <UserColumn users={admins} />
+      <UserColumn users={getFilteredUsers(UserLevel.user)} />
+      <UserColumn users={getFilteredUsers(UserLevel.admin)} />
     </Grid>
   );
 };
