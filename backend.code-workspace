@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "backend/cerber"
+		},
+		{
+			"path": "backend/common"
+		},
+		{
+			"path": "backend/athena"
+		},
+		{
+			"path": "backend/hermes"
+		},
+		{
+			"path": "backend/plutus"
+		}
+	]
+}
