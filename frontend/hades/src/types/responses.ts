@@ -3,7 +3,11 @@ import { UserDetails } from './user';
 
 export type ErrorResponse = {
   response: {
-    data: string;
+    data: {
+      message: string;
+      statusCode: number;
+      error: string;
+    };
   };
 };
 

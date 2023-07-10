@@ -29,12 +29,10 @@ export const useGetProducts = (): FetchedData<Product[]> => {
         .then((response: ProductResponse) => {
           setProducts(response.data);
           setIsLoading(false);
-          console.log(response);
         })
         .catch((error: ErrorResponse) => {
-          setError(error.response.data);
+          setError(error.response.data.error);
           setIsLoading(false);
-          console.log(error);
         });
     } else {
       setIsLoading(false);

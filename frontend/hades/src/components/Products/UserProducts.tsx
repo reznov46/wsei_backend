@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 import React from 'react';
 import { useGetProducts } from '../../hooks/useGetCurrentUserProducts';
+import { routeBuilder } from '../../routes/routes';
 import { productCardStyles } from '../../styles/productCard';
 import { ErrorComponent } from '../Common/ErrorComponent';
 import { Loader } from '../Common/Loader';
@@ -15,7 +16,7 @@ export const UserProducts: React.FC = () => {
 
   if (error) {
     return (
-      <ErrorComponent text={error} />
+      <ErrorComponent text={error} link={routeBuilder.details} />
     )
   };
 

@@ -30,7 +30,7 @@ export const useGetUserById = ({
           setIsLoading(false);
         })
         .catch((error: ErrorResponse) => {
-          setError(error.response.data);
+          setError(error.response.data.error);
           setIsLoading(false);
         });
     } else {
