@@ -7,7 +7,10 @@ import { ErrorResponse, ProductResponse } from '../types/responses';
 import { useGetQueryParams } from './useGetQueryParams';
 import { useGetToken } from './useGetToken';
 
-export const useGetProducts = (): FetchedData<Product[]> => {
+export const useGetProducts = (
+  customPageNum?: number,
+  customPageSize?: number,
+): FetchedData<Product[]> => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,8 +24,8 @@ export const useGetProducts = (): FetchedData<Product[]> => {
         .get(endpoints.userProducts, {
           headers: { Authorization: `Bearer ${token}` },
           params: {
-            page,
-            pageSize,
+            page: customPageNum ?? page,
+            pageSize: customPageSize ?? pageSize,
             createdBy,
           },
         })
@@ -38,7 +41,7 @@ export const useGetProducts = (): FetchedData<Product[]> => {
       setIsLoading(false);
       setError('Please log in');
     }
-  }, [token, createdBy]);
+  }, [token, page, pageSize, createdBy]);
 
   return {
     data: products,
