@@ -21,7 +21,7 @@ interface FormCardProps {
   header: string;
 }
 
-export const FormCard: React.FC<FormCardProps> = ({
+export const IdentityFormCard: React.FC<FormCardProps> = ({
   user,
   error,
   handleSubmit,

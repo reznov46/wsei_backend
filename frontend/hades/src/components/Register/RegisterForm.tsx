@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { endpoints, routeBuilder } from '../../routes/routes';
-import { FormCard } from '../Form/FormCard';
+import { IdentityFormCard } from './IdentityFormCard';
 import { User } from '../../types/user';
 import { useHistory } from 'react-router';
 import { emptyUser } from '../../utils/emptyUser';
@@ -22,7 +22,7 @@ export const RegisterForm: React.FC = () => {
   }
 
   return (
-    <FormCard
+    <IdentityFormCard
       handleSubmit={handleSubmit}
       user={user}
       error={error}

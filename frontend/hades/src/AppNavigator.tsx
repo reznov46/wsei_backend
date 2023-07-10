@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { routeBuilder } from './routes/routes';
-import { LoginForm } from './components/Login/LoginForm';
+import { LoginForm } from './components/Register/LoginForm';
 import { RegisterForm } from './components/Register/RegisterForm';
 import { CurrentUserDetails } from './components/UserDetails/CurrentUserDetails';
 import { UsersList } from './components/UsersList/UsersList';
