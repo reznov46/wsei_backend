@@ -21,7 +21,7 @@ export const Paginator: React.FC<PaginatorProps> = ({
   const handlePrevClick = () => setPageNum(pageNum - 1);
 
   useEffect(() => {
-    history.replace(`?${getPageParam(pageNum)}&${getPageSizeParam(3)}`)
+    history.replace(`?${getPageParam(pageNum)}&${getPageSizeParam(8)}`)
   }, [pageNum]);
 
   return (
