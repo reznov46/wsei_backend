@@ -12,3 +12,4 @@ export * from './modules/config/getEnv.decorator';
 export * from './modules/config/env.module';
 export * from './modules/config/interfaces/env.interface';
 export * from './types/dictionary';
+export * from './utils/string_to_bool';
