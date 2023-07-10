@@ -18,7 +18,7 @@ import { ProductCategoriesModule } from './productCategories/productCategories.m
 			useFactory: (env: Env) => ({
 				type: 'mysql',
 				// Override host to localhost if not running in Docker.
-				host: process.env.DOCKER ? env.databaseHost : 'localhost',
+				host: env.isDebug ? 'localhost' : env.databaseHost,
 				username: env.databaseUser,
 				password: env.databasePassword,
 				database: env.databaseDbName,

@@ -3,6 +3,7 @@ import { EnvModuleConfig } from './types/envModuleConfig';
 import { Logger } from '../../logger/logger';
 import { Dictionary } from '../../types/dictionary';
 import { ENV_PROVIDER_TOKEN } from './env.constants';
+import { EnvInterface } from './interfaces/env.interface';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -11,7 +12,7 @@ dotenv.config();
 export class EnvModule {
 	private static readonly logger = new Logger('EnvModule');
 
-	static forRoot<T>(config: EnvModuleConfig<T>): DynamicModule {
+	static forRoot<T extends EnvInterface>(config: EnvModuleConfig<T>): DynamicModule {
 		const env = config.factory(process.env as Dictionary<string>);
 		if (env == null) {
 			this.logger.fatal('forRoot, cannot build env!');

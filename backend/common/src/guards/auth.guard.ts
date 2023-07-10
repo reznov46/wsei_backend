@@ -4,11 +4,17 @@ import { lastValueFrom } from 'rxjs';
 import { User, UserLevelComparable } from '../models/user';
 import { TokenExtractor } from '../helpers/tokenExtractor';
 import { Logger } from '../logger/logger';
+import { GetEnv } from '../modules/config/getEnv.decorator';
+import { EnvInterface } from '../modules/config/interfaces/env.interface';
 
 export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 	@Injectable()
 	class AuthGuardMixin implements CanActivate {
-		constructor(readonly tokenExtractor: TokenExtractor, readonly httpService: HttpService) {}
+		constructor(
+			readonly tokenExtractor: TokenExtractor,
+			readonly httpService: HttpService,
+			@GetEnv readonly env: EnvInterface,
+		) {}
 
 		readonly logger = new Logger('AuthGuard');
 
@@ -23,8 +29,7 @@ export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 
 			const response = await lastValueFrom(
 				this.httpService.get<User>('user-by-token', {
-					// Todo: maybe take as a parameter, that will be injected in the constructor (the env).
-					baseURL: 'http://cerber:3001',
+					baseURL: this.env.isDebug ? 'http://localhost:3001' : 'https://cerber:3001',
 					params: {
 						token,
 					},

@@ -10,4 +10,5 @@ export * from './modules/auth/commonAuth.module';
 export * from './modules/config/env.constants';
 export * from './modules/config/getEnv.decorator';
 export * from './modules/config/env.module';
+export * from './modules/config/interfaces/env.interface';
 export * from './types/dictionary';

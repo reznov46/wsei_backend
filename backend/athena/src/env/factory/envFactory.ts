@@ -60,6 +60,7 @@ export class EnvFactory {
 		}
 
 		return Object.freeze({
+			isDebug: process.env.DOCKER ? false : true,
 			port: portParsed,
 			databaseHost,
 			databasePort: databasePortParsed,

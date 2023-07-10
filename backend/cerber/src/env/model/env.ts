@@ -1,4 +1,6 @@
-interface _Env {
+import { EnvInterface } from 'common';
+
+interface _Env extends EnvInterface {
 	port: number;
 	databaseHost: string;
 	databasePort: number;
@@ -7,7 +9,7 @@ interface _Env {
 	databasePassword: string;
 	jwtSecret: string;
 	jwtExpirationTime: number;
-	allowedCorsAddresses: string[]
+	allowedCorsAddresses: string[];
 }
 
 export type Env = Readonly<_Env>;

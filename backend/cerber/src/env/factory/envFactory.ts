@@ -71,17 +71,18 @@ export class EnvFactory {
 			return null;
 		}
 		const allowedCorsAddressesString = env['ALLOWED_CORS_ADDRESSES'];
-		if(allowedCorsAddressesString == null) {
-			this.logger.error("build, allowed cors string is null")
+		if (allowedCorsAddressesString == null) {
+			this.logger.error('build, allowed cors string is null');
 			return null;
 		}
-		const allowedCorsAddresses = allowedCorsAddressesString.split(", ")
-		if(allowedCorsAddresses == null) {
-			this.logger.error('build, allowed cors address are null')
+		const allowedCorsAddresses = allowedCorsAddressesString.split(', ');
+		if (allowedCorsAddresses == null) {
+			this.logger.error('build, allowed cors address are null');
 			return null;
 		}
 
 		return Object.freeze({
+			isDebug: process.env.DOCKER ? false : true,
 			port: portParsed,
 			databaseHost,
 			databasePort: databasePortParsed,
@@ -90,7 +91,7 @@ export class EnvFactory {
 			databasePassword,
 			jwtSecret,
 			jwtExpirationTime: jwtExpirationTimeParsed,
-			allowedCorsAddresses
+			allowedCorsAddresses,
 		});
 	}
 }
