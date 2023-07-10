@@ -29,7 +29,7 @@ export const AuthGuard = (minimumLevel: UserLevelComparable) => {
 
 			const response = await lastValueFrom(
 				this.httpService.get<User>('user-by-token', {
-					baseURL: this.env.isDebug ? 'http://localhost:3001' : 'https://cerber:3001',
+					baseURL: this.env.isDebug ? 'http://localhost:3001' : 'http://cerber:3001',
 					params: {
 						token,
 					},
