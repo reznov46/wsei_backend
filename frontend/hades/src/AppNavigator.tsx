@@ -8,6 +8,7 @@ import { UsersList } from './components/UsersList/UsersList';
 import { appStyles } from './styles/app';
 import { NotFound } from './components/Common/NotFound';
 import { SelectedUserDetails } from './components/UserDetails/SelectedUserDetails';
+import { UserProducts } from './components/Products/UserProducts';
 
 export const AppNavigator: React.FC = () => (
   <div style={appStyles.navigator}>
@@ -18,6 +19,7 @@ export const AppNavigator: React.FC = () => (
       <Route path={routeBuilder.details} component={CurrentUserDetails} exact />
       <Route path={routeBuilder.users} component={UsersList} exact />
       <Route path={routeBuilder.userId} component={SelectedUserDetails} exact />
+      <Route path={routeBuilder.userProducts} component={UserProducts} exact />
       <Route path={routeBuilder.noPage} component={NotFound} />
     </Switch>
   </div>

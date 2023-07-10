@@ -13,6 +13,7 @@ import { userDetailsStyles } from '../../styles/userDetails';
 import { UserDetails } from '../../types/user';
 import { FONT_FAMILY } from '../../utils/consts';
 import { convertDate } from '../../utils/convertDate';
+import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
 
 interface UserDetailsCardProps {
   user: UserDetails;
@@ -30,12 +31,17 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = ({
     level,
     createdAt
   } = user;
+  const { data } = useGetCurrentUserDetails();
 
-  const handleOnClick = (): void => {
+  const handleOnClickBack = (): void => {
     redirectBack
       ? history.goBack()
       : history.push(routeBuilder.home)
   };
+
+  const handleOnClickProduct = (): void => {
+    history.push(`${routeBuilder.users}/${id}/products`)
+  }
 
   return (
     <Card style={userDetailsStyles.card}>
@@ -75,8 +81,13 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = ({
         </div>
       </CardContent>
       <CardActions>
+        {data.id === id && (
+          <Button onClick={handleOnClickProduct}>
+            Your products
+          </Button>
+        )}
         <Button
-          onClick={handleOnClick}
+          onClick={handleOnClickBack}
           style={userDetailsStyles.button}
         >
           {redirectBack ? 'Back' : 'Home'}
