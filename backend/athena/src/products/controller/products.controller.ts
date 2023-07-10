@@ -36,6 +36,26 @@ export class ProductsController {
 			}
 		}
 
+		if (filters.sortBy || filters.sortDirection) {
+			if (!filters.sortBy || !filters.sortDirection) {
+				throw new HttpException('sortBy and sortDirection must be specified together', HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		if (filters.page || filters.pageSize) {
+			if (!filters.page || !filters.pageSize) {
+				throw new HttpException('page and pageSize must be specified together', HttpStatus.BAD_REQUEST);
+			}
+
+			if (filters.page < 0) {
+				throw new HttpException('page must be greater than 0', HttpStatus.BAD_REQUEST);
+			}
+
+			if (filters.pageSize < 0) {
+				throw new HttpException('page must be greater than 0', HttpStatus.BAD_REQUEST);
+			}
+		}
+
 		return await this.productService.get(filters);
 	}
 

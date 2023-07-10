@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsDecimal, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsDecimal, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class ProductFiltersDto {
 	@ApiProperty()
@@ -58,4 +58,16 @@ export class ProductFiltersDto {
 	@IsNotEmpty()
 	@IsOptional()
 	readonly sortDirection?: 'ASC' | 'DESC';
+
+	@ApiProperty()
+	@IsDecimal()
+	@IsNotEmpty()
+	@IsOptional()
+	readonly pageSize?: number;
+
+	@ApiProperty()
+	@IsDecimal()
+	@IsNotEmpty()
+	@IsOptional()
+	readonly page?: number;
 }

@@ -31,37 +31,50 @@ export class ProductsService {
 		}
 
 		if (filters.minPrice != null) {
-			queryBuilder = queryBuilder.andWhere('`price` >= :minPrice', { minPrice: filters.minPrice });
+			queryBuilder = queryBuilder.andWhere('`products`.`price` >= :minPrice', { minPrice: filters.minPrice });
 		}
 
 		if (filters.maxPrice != null) {
-			queryBuilder = queryBuilder.andWhere('`price` <= :maxPrice', { maxPrice: filters.maxPrice });
+			queryBuilder = queryBuilder.andWhere('`products`.`price` <= :maxPrice', { maxPrice: filters.maxPrice });
 		}
 
 		if (filters.categoryId != null) {
-			queryBuilder = queryBuilder.andWhere('`product_category_id` = :categoryId', { categoryId: filters.categoryId });
+			queryBuilder = queryBuilder.andWhere('`products`.`product_category_id` = :categoryId', {
+				categoryId: filters.categoryId,
+			});
 		}
 
 		if (filters.createdBy != null) {
-			queryBuilder = queryBuilder.andWhere('`created_by` = :createdBy', { createdBy: filters.createdBy });
+			queryBuilder = queryBuilder.andWhere('`products`.`created_by` = :createdBy', { createdBy: filters.createdBy });
 		}
 
 		if (filters.createdAfter != null) {
-			queryBuilder = queryBuilder.andWhere('`created_at` >= :createdAfter', { createdAfter: filters.createdAfter });
+			queryBuilder = queryBuilder.andWhere('`products`.`created_at` >= :createdAfter', {
+				createdAfter: filters.createdAfter,
+			});
 		}
 
 		if (filters.createdBefore != null) {
-			queryBuilder = queryBuilder.andWhere('`created_at` <= :createdBefore', { createdBefore: filters.createdBefore });
+			queryBuilder = queryBuilder.andWhere('`products`.`created_at` <= :createdBefore', {
+				createdBefore: filters.createdBefore,
+			});
 		}
 
 		if (filters.sortBy != null && filters.sortDirection != null) {
-			queryBuilder = queryBuilder.orderBy(filters.sortBy, filters.sortDirection);
+			queryBuilder = queryBuilder.orderBy(`\`products\`.${filters.sortBy}`, filters.sortDirection);
 		}
 
 		if (filters.isDeleted !== 'null') {
 			queryBuilder = queryBuilder.andWhere('`products`.`is_deleted` = :isDeleted', {
 				isDeleted: stringToBool(filters.isDeleted) ?? false,
 			});
+		}
+
+		if (filters.pageSize != null && filters.page != null) {
+			const skip = filters.pageSize * filters.page;
+			const take = filters.pageSize;
+
+			queryBuilder = queryBuilder.skip(skip).take(take);
 		}
 
 		const products = await queryBuilder.getRawAndEntities();
