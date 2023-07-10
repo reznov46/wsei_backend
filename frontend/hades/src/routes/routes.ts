@@ -9,10 +9,10 @@ const ATHENA_HOST =
 export const endpoints = {
   currentUser: `${CERBER_HOST}/user-by-token`,
   login: `${CERBER_HOST}/login`,
-  products: `${ATHENA_HOST}/products`,
+  userProducts: `${ATHENA_HOST}/products`,
   register: `${CERBER_HOST}/register`,
   users: `${CERBER_HOST}/users`,
-  user: (id: string) => `${CERBER_HOST}/users/${id}`,
+  user: (id: string): string => `${CERBER_HOST}/users/${id}`,
 };
 
 export const routeBuilder = {
@@ -23,4 +23,5 @@ export const routeBuilder = {
   register: '/register',
   users: '/users',
   userId: '/users' + '/:id',
+  userProducts: '/users' + '/:id' + '/products',
 } as Route;

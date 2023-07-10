@@ -1,3 +1,4 @@
+import { Product } from './product';
 import { UserDetails } from './user';
 
 export type ErrorResponse = {
@@ -21,4 +22,8 @@ export interface UsersResponse {
 
 export interface UserByIdResponse {
   data: UserDetails;
+}
+
+export interface ProductResponse {
+  data: Product[];
 }
