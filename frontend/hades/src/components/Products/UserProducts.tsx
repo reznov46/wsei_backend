@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Grid } from '@mui/material';
 import React from 'react';
 import { useGetCurrentUserProducts } from '../../hooks/useGetCurrentUserProducts';
 import { productCardStyles } from '../../styles/productCard';
@@ -19,13 +19,21 @@ export const UserProducts: React.FC = () => {
     )
   };
 
+  if (!data.length) {
+    return <ErrorComponent
+      text='Your inventory is empty'
+      link='add'
+      customButtonText='Add product'
+    />
+  }
+
   return (
-    <Box component='div' style={productCardStyles.div}>
+    <Grid container>
       {data.map((product) => (
-        <div key={product.id}>
+        <Grid item xs={3} style={productCardStyles.grid} key={product.id}>
           <ProductCard product={product} />
-        </div>
+        </Grid>
       ))}
-    </Box>
+    </Grid>
   )
 }

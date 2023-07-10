@@ -10,16 +10,17 @@ import {
 } from '@mui/material';
 import { routeBuilder } from '../../routes/routes';
 import { errorStyles } from '../../styles/error';
-import { FONT_FAMILY } from '../../utils/consts';
 
 interface ErrorProps {
   text: string
   link?: string
+  customButtonText?: string
 }
 
 export const ErrorComponent: React.FC<ErrorProps> = ({
   text,
-  link
+  link,
+  customButtonText
 }) => {
   const history = useHistory();
   const redirectedPage = Object.entries(routeBuilder)
@@ -35,7 +36,6 @@ export const ErrorComponent: React.FC<ErrorProps> = ({
         <CardContent>
           <Typography
             variant="h5"
-            fontFamily={FONT_FAMILY}
             style={errorStyles.header}
           >
             <b>{text}</b>
@@ -47,7 +47,7 @@ export const ErrorComponent: React.FC<ErrorProps> = ({
               onClick={() => history.push(link)}
               style={errorStyles.button}
             >
-              {buttonText}
+              {customButtonText ? customButtonText : buttonText}
             </Button>
           </CardActions>
         )}
