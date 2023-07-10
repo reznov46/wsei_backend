@@ -38,7 +38,7 @@ export const useGetProducts = (): FetchedData<Product[]> => {
       setIsLoading(false);
       setError('Please log in');
     }
-  }, [token]);
+  }, [token, createdBy]);
 
   return {
     data: products,

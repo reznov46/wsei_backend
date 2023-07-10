@@ -7,7 +7,7 @@ import { ErrorComponent } from '../Common/ErrorComponent';
 import { Loader } from '../Common/Loader';
 import { ProductCard } from './ProductCard';
 
-export const UserProducts: React.FC = () => {
+export const Products: React.FC = () => {
   const { data, loading, error } = useGetProducts();
 
   if (loading) {
