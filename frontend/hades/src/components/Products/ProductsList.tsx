@@ -11,7 +11,7 @@ import { ProductCard } from './ProductCard';
 
 export const ProductsList: React.FC = () => {
   const { data, loading, error } = useGetProducts();
-  const { pageSize } = useGetQueryParams();
+  const { pageSize, createdBy } = useGetQueryParams();
 
   if (loading) {
     return <Loader />

@@ -23,7 +23,6 @@ export const useGetUsers = (): FetchedData<UserDetails[]> => {
       })
       .catch((error: ErrorResponse) => {
         setError(error.response.data.error);
-        console.log(error);
         setIsLoading(false);
       });
   }, []);

@@ -1,3 +1,4 @@
+import { Category } from './category';
 import { Product } from './product';
 import { UserDetails } from './user';
 
@@ -30,4 +31,8 @@ export interface UserByIdResponse {
 
 export interface ProductResponse {
   data: Product[];
+}
+
+export interface CategoryResponse {
+  data: Category[];
 }

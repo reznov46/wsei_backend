@@ -1,4 +1,5 @@
 export interface Route {
+  categories: string;
   details: string;
   home: string;
   login: string;

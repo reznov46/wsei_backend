@@ -32,7 +32,7 @@ export const userPanel = [
 
 export const productPanel = [
   { text: 'Products', link: productsRoute, icon: <FormatListBulletedIcon /> },
-  { text: 'Categories', link: '', icon: <CategoryIcon /> },
+  { text: 'Categories', link: routeBuilder.categories, icon: <CategoryIcon /> },
   { text: 'Add Product', link: '', icon: <HomeIcon /> },
   { text: 'Add Category', link: '', icon: <HomeIcon /> },
 ] as Array<NavbarElement>
