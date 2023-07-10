@@ -17,6 +17,18 @@ export class EnvFactory {
 			return null;
 		}
 
+		const adminUsername = env['ADMIN_USERNAME'];
+		if (adminUsername == null) {
+			this.logger.error('build, admin username is null!');
+			return null;
+		}
+
+		const adminPassword = env['ADMIN_PASSWORD'];
+		if (adminPassword == null) {
+			this.logger.error('build, admin password is null!');
+			return null;
+		}
+
 		const databaseHost = env['DATABASE_HOST'];
 		if (databaseHost == null) {
 			this.logger.error('build, database host is null!');
@@ -61,6 +73,8 @@ export class EnvFactory {
 
 		return Object.freeze({
 			isDebug: process.env.DOCKER ? false : true,
+			adminUsername,
+			adminPassword,
 			port: portParsed,
 			databaseHost,
 			databasePort: databasePortParsed,

@@ -21,7 +21,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `level`, `created_at`, `updated_at`) VALUES
 ('13ccb720-d6c8-11ed-b3ec-47ad62198f81', 'user', '$2a$10$pVjfg4NDmRp2s1UWCOQ/9OjokrWJyA3bsB7eAo1scTdO8zJjUAAVC', 'user', '2023-04-09 11:17:13', '2023-04-09 11:17:13'),
-('3813f800-d6b9-11ed-b59f-d3e88e0f455e', 'admin', '$2a$10$Sxw8YBH5DlALqjHMEdf3DOMuT/2LER562VN.mFpX/Cc9D3n6BcZOe', 'admin', '2023-04-09 09:30:51', '2023-04-09 09:30:51');
+('3813f800-d6b9-11ed-b59f-d3e88e0f455e', 'admin', '$2a$10$Sxw8YBH5DlALqjHMEdf3DOMuT/2LER562VN.mFpX/Cc9D3n6BcZOe', 'admin', '2023-04-09 09:30:51', '2023-04-09 09:30:51')
+('d7ae3deb-6573-4b4a-8d7f-a9038253947e', 'microservice', '$2b$10$P8c1t9Wlq86AF6sSLEvZ3OOrTWgkkT5PA2Bg/E5tKnt5DsJDM4C.a', 'microservice', '2023-07-10 18:37:17', '2023-07-10 18:37:17');
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -91,7 +92,32 @@ INSERT INTO `products` (`id`, `name`, `description`, `full_description`, `price`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
+USE hermes;
 
+--
+-- Table structure for table `orders`
+--
+CREATE TABLE `orders` (
+  `id` varchar(36) NOT NULL,
+  `product_id` varchar(255) NOT NULL,
+  `quantity` smallint UNSIGNED NOT NULL,
+  `total_price` decimal(18,2) UNSIGNED NOT NULL,
+  `bought_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `bought_by` varchar(255) NOT NULL
+);
 
+--
+-- Dumping data for table `orders`
+--
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 COMMIT;

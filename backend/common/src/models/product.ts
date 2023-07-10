@@ -18,7 +18,7 @@ export class Product {
 	public fullDescription?: string;
 
 	//* Price of the product, stores only 2 decimal places and max 18 digits total.
-	@Column({ name: 'price', type: 'decimal', precision: 18, scale: 2 })
+	@Column({ name: 'price', type: 'decimal', precision: 18, scale: 2, unsigned: true })
 	public price: number;
 
 	@ManyToOne(() => ProductCategory, (productCategory: ProductCategory) => productCategory.products)

@@ -24,7 +24,7 @@ export class ProductsController {
 	constructor(private productService: ProductsService) {}
 	@Get()
 	@UseGuards(AuthGuard(UserLevelComparable.user))
-	async getAll(@GetUser() user: User, @Query() filters: ProductFiltersDto): Promise<Product[] | null> {
+	async getAll(@GetUser() user: User, @Query() filters: ProductFiltersDto): Promise<Product[]> {
 		if (filters.isDeleted === 'true') {
 			const isAdmin = UserLevelComparable.fromUserLevel(user.level) >= UserLevelComparable.admin;
 			if (!filters.createdBy && !isAdmin) {

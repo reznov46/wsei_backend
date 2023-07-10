@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ENV_PROVIDER_TOKEN, EnvModule, TokenExtractor } from 'common';
+import { ENV_PROVIDER_TOKEN, EnvModule, Order, TokenExtractor } from 'common';
 import { EnvFactory } from './env/factory/envFactory';
 import { Env } from './env/model/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
 	imports: [
@@ -20,10 +21,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 				username: env.databaseUser,
 				password: env.databasePassword,
 				database: env.databaseDbName,
+				entities: [Order],
 				// synchronize: true,
 				logging: true,
 			}),
 		}),
+		OrdersModule,
 	],
 	controllers: [],
 	providers: [TokenExtractor],

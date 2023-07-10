@@ -10,7 +10,7 @@ import { plainToClass } from 'class-transformer';
 @Injectable()
 export class ProductsService {
 	constructor(@InjectRepository(Product) private readonly productRepository: Repository<Product>) {}
-	public async get(filters: ProductFiltersDto): Promise<Product[] | null> {
+	public async get(filters: ProductFiltersDto): Promise<Product[]> {
 		const search = filters.search?.trim().toLowerCase();
 
 		let queryBuilder = this.productRepository.createQueryBuilder('products');

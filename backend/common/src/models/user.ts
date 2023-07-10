@@ -3,6 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export enum UserLevel {
 	user = 'user',
 	admin = 'admin',
+	microservice = 'microservice',
 }
 
 @Entity({ name: 'users' })
@@ -29,6 +30,7 @@ export class User {
 export enum UserLevelComparable {
 	user = 1,
 	admin = 2,
+	microservice = 3,
 }
 
 export namespace UserLevelComparable {
@@ -39,6 +41,9 @@ export namespace UserLevelComparable {
 
 			case UserLevel.admin:
 				return UserLevelComparable.admin;
+
+			case UserLevel.microservice:
+				return UserLevelComparable.microservice;
 		}
 	}
 }
