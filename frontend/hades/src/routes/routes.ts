@@ -23,5 +23,5 @@ export const routeBuilder = {
   register: '/register',
   users: '/users',
   userId: '/users' + '/:id',
-  userProducts: '/users' + '/:id' + '/products',
+  products: '/products',
 } as Route;

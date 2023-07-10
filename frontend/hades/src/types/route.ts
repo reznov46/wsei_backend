@@ -6,5 +6,5 @@ export interface Route {
   register: string;
   users: string;
   userId: string;
-  userProducts: string;
+  products: string;
 }

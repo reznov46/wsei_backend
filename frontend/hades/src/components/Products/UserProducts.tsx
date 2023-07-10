@@ -1,13 +1,13 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import { useGetCurrentUserProducts } from '../../hooks/useGetCurrentUserProducts';
+import { useGetProducts } from '../../hooks/useGetCurrentUserProducts';
 import { productCardStyles } from '../../styles/productCard';
 import { ErrorComponent } from '../Common/ErrorComponent';
 import { Loader } from '../Common/Loader';
 import { ProductCard } from './ProductCard';
 
 export const UserProducts: React.FC = () => {
-  const { data, loading, error } = useGetCurrentUserProducts();
+  const { data, loading, error } = useGetProducts();
 
   if (loading) {
     return <Loader />
