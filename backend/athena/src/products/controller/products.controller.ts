@@ -1,26 +1,54 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	HttpCode,
+	HttpException,
+	HttpStatus,
+	Param,
+	Patch,
+	Post,
+	Query,
+	UseGuards,
+} from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { AuthGuard, GetUser, Product, User, UserLevelComparable } from 'common';
 import { ProductCreateDto } from '../dtos/productCreate.dto';
 import { ProductUpdateDto } from '../dtos/productUpdate.dto';
 import { ProductsService } from '../service/products.service';
-import { ProductAdminGetByUserDto } from '../dtos/productAdminGetByUser.dto';
+import { ProductFiltersDto } from '../dtos/productFilters.dto';
 
 @Controller('products')
 export class ProductsController {
 	constructor(private productService: ProductsService) {}
 	@Get()
 	@UseGuards(AuthGuard(UserLevelComparable.user))
-	async get(@GetUser() user: User): Promise<Product[] | null> {
-		const products = this.productService.get(user.id);
-		return products;
+	async getAll(@GetUser() user: User, @Query() filters: ProductFiltersDto): Promise<Product[] | null> {
+		if (filters.isDeleted === 'true') {
+			const isAdmin = UserLevelComparable.fromUserLevel(user.level) >= UserLevelComparable.admin;
+			if (!filters.createdBy && !isAdmin) {
+				throw new HttpException('createdBy must be specified to you when isDeleted is true', HttpStatus.FORBIDDEN);
+			}
+
+			if (filters.createdBy !== user.id && !isAdmin) {
+				throw new HttpException('You can only view your own deleted products', HttpStatus.FORBIDDEN);
+			}
+		}
+
+		return await this.productService.get(filters);
 	}
 
-	// @Get('admin/:userId')
-	// @UseGuards(AuthGuard(UserLevelComparable.admin))
-	// async getForUser(@Param() params: ProductAdminGetByUserDto) {
-	// 	return this.productService.get(params.userId);
-	// }
+	@Get('/:id')
+	@UseGuards(AuthGuard(UserLevelComparable.user))
+	async getOne(@Param() params: { id: string }): Promise<Product> {
+		const product = await this.productService.getOne(params.id);
+		if (product == null) {
+			throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+		}
+
+		return product;
+	}
 
 	@Post()
 	@HttpCode(204)

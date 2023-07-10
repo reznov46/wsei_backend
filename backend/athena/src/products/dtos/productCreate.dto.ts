@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDecimal, IsNotEmpty, IsOptional, IsString, ValidateIf } from 'class-validator';
+import { IsDecimal, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class ProductCreateDto {
 	@ApiProperty({
@@ -26,10 +26,7 @@ export class ProductCreateDto {
 	@IsDecimal()
 	readonly price: number;
 
-	@ApiProperty(
-		{maximum: 36, minimum: 36}
-	)
+	@ApiProperty({ maximum: 36, minimum: 36 })
 	@IsString()
 	readonly productCategoryId: string;
-
 }
