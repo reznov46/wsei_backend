@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useGetCategories } from '../../hooks/useGetCategories';
 import { routeBuilder } from '../../routes/routes';
-import { getCategoryIdParam, getPageNumParam, getPageSizeParam } from '../../utils/defaultParams';
 import { ErrorComponent } from '../Common/ErrorComponent';
 import { Loader } from '../Common/Loader';
-import { CategoryCard } from './CategoryCard';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import { CategoryItem } from './CategoryItem';
+import { categoryStyles } from '../../styles/categories';
 
 export const CategoriesList: React.FC = () => {
   const { data, loading, error } = useGetCategories();
@@ -23,17 +24,15 @@ export const CategoriesList: React.FC = () => {
     )
   };
 
-  const getLinkFilteredByCategory = (categoryId: string): string => {
-    return `${routeBuilder.products}?${getCategoryIdParam(categoryId)}&${getPageNumParam()}&${getPageSizeParam()}`;
-  }
-
   return (
-    <>
-      {data.map((category) => (
-        <Link key={category.id} to={getLinkFilteredByCategory(category.id)}>
-          <CategoryCard category={category} />
-        </Link>
-      ))}
-    </>
+    <Box fontStyle={categoryStyles.div}>
+      <List dense style={categoryStyles.list}>
+        {data.map((category) => (
+          <div key={category.id}>
+            <CategoryItem category={category} />
+          </div>
+        ))}
+      </List>
+    </Box>
   )
 }

@@ -27,10 +27,7 @@ export const AddCategory: React.FC = () => {
       .post(endpoints.categories, body, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
-        history.push(routeBuilder.categories)
-        console.log(response)
-      })
+      .then(() => history.push(routeBuilder.categories))
       .catch((error: ErrorResponse) => {
         setErrors(error.response.data.message as string[])
       })

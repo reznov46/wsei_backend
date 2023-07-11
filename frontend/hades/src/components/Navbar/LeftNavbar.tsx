@@ -39,7 +39,7 @@ export const LeftNavbar: React.FC = () => {
     : defaultPanel;
 
   const categoryNavPanel = isUserLogged
-    ? !isAdmin ? categoryPanel.slice(0, 1) : categoryPanel
+    ? isAdmin(level as UserLevel) ? categoryPanel : [categoryPanel[0]]
     : [];
 
   const productNavPanel = isUserLogged ? productPanel : [];
