@@ -14,7 +14,11 @@ import { UserDetails } from '../../types/user';
 import { FONT_FAMILY } from '../../utils/consts';
 import { convertDate } from '../../utils/convertDate';
 import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
-import { getCreatedByParam, getPageNumParam, getPageSizeParam } from '../../utils/defaultParams';
+import {
+  getCreatedByParam,
+  getPageNumParam,
+  getPageSizeParam
+} from '../../utils/defaultParams';
 
 interface UserDetailsCardProps {
   user: UserDetails;
@@ -86,7 +90,7 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = ({
       </CardContent>
       <CardActions>
         <Button onClick={handleOnClickProduct}>
-          {data.id === id ? 'Your products' : 'See user products'}
+          {data.id === id ? 'Your products' : 'User products'}
         </Button>
         <Button
           onClick={handleOnClickBack}

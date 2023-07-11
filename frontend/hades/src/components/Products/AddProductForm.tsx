@@ -18,6 +18,7 @@ import { endpoints, routeBuilder } from '../../routes/routes';
 import { formStyles } from '../../styles/formCard';
 import { ErrorResponse } from '../../types/responses';
 import { getCreatedByParam, getPageNumParam, getPageSizeParam } from '../../utils/defaultParams';
+import { ErrorList } from '../Common/ErrorList';
 
 export const AddProductForm: React.FC = () => {
   const [errors, setErrors] = useState<string[]>([]);
@@ -63,11 +64,8 @@ export const AddProductForm: React.FC = () => {
       component="form"
       style={formStyles.div}
       onSubmit={handleOnSubmit}
-      sx={{ m: 1, minWidth: 120 }}
     >
-      <Card
-        style={formStyles.card}
-      >
+      <Card style={formStyles.card}>
         <CardContent>
           <h2 style={formStyles.header}>Add product</h2>
           <div>
@@ -146,18 +144,3 @@ export const AddProductForm: React.FC = () => {
     </Box>
   );
 };
-
-const ErrorList: React.FC<{ errors: string[] }> = ({ errors }) => (
-  <div style={formStyles.errorArray}>
-    <ul style={formStyles.ul}>
-      {errors.map((err) => (
-        <li
-          key={err}
-          style={formStyles.li}
-        >
-          {err}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
