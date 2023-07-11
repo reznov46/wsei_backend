@@ -11,7 +11,7 @@ import { ProductCard } from './ProductCard';
 
 export const ProductsList: React.FC = () => {
   const { data, loading, error } = useGetProducts();
-  const { pageSize, createdBy } = useGetQueryParams();
+  const { pageSize } = useGetQueryParams();
 
   if (loading) {
     return <Loader />
@@ -26,7 +26,7 @@ export const ProductsList: React.FC = () => {
   if (!data.length) {
     return <ErrorComponent
       text='The inventory is empty'
-      link={routeBuilder.users}
+    // link={routeBuilder.users}
     />
   }
 

@@ -28,7 +28,9 @@ export const ErrorComponent: React.FC<ErrorProps> = ({
 
   const buttonText = redirectedPage
     ? `Redirect to ${redirectedPage} page`
-    : 'Redirect';
+    : 'Back';
+
+  const handleOnClick = (): void => link ? history.push(link) : history.goBack();
 
   return (
     <Box style={errorStyles.div}>
@@ -41,16 +43,14 @@ export const ErrorComponent: React.FC<ErrorProps> = ({
             <b>{text}</b>
           </Typography>
         </CardContent>
-        {link && (
-          <CardActions>
-            <Button
-              onClick={() => history.push(link)}
-              style={errorStyles.button}
-            >
-              {customButtonText ? customButtonText : buttonText}
-            </Button>
-          </CardActions>
-        )}
+        <CardActions>
+          <Button
+            onClick={handleOnClick}
+            style={errorStyles.button}
+          >
+            {customButtonText ? customButtonText : buttonText}
+          </Button>
+        </CardActions>
       </Card>
     </Box>
   );

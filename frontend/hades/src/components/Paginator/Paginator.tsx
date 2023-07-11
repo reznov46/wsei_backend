@@ -41,7 +41,7 @@ export const Paginator: React.FC<PaginatorProps> = ({
       >
         <KeyboardArrowLeftIcon />
       </IconButton>
-      {pageNum}
+      {pageNum + 1}
       <IconButton
         onClick={handleNextClick}
         disabled={disableNextButton}
