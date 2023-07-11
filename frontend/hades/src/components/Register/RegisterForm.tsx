@@ -18,7 +18,7 @@ export const RegisterForm: React.FC = () => {
 
     await axios.post(endpoints.register, user)
       .then(() => history.push(routeBuilder.login))
-      .catch((error: ErrorResponse) => setError(error.response.data));
+      .catch((error: ErrorResponse) => setError(error.response.data.message));
   }
 
   return (

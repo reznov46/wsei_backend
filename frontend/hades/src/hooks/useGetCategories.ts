@@ -1,32 +1,28 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { endpoints } from '../routes/routes';
+import { Category } from '../types/category';
 import { FetchedData } from '../types/fetchedData';
-import { ErrorResponse, UserByIdResponse } from '../types/responses';
-import { UserDetails } from '../types/user';
-import { emptyCurrentUser } from '../utils/emptyUser';
+import { ErrorResponse, ProductResponse } from '../types/responses';
+import { useGetQueryParams } from './useGetQueryParams';
 import { useGetToken } from './useGetToken';
 
-interface UseGetUserByIdProps {
-  id: string;
-}
-
-export const useGetUserById = ({
-  id,
-}: UseGetUserByIdProps): FetchedData<UserDetails> => {
+export const useGetCategories = (): FetchedData<Category[]> => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
-  const [user, setUser] = useState<UserDetails>(emptyCurrentUser);
+  const [categories, setCategories] = useState<Category[]>([]);
+
   const { token } = useGetToken();
+  const { page, pageSize, createdBy } = useGetQueryParams();
 
   useEffect(() => {
     if (token?.length) {
       axios
-        .get(endpoints.user(id), {
+        .get(endpoints.categories, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then((response: UserByIdResponse) => {
-          setUser(response.data);
+        .then((response: ProductResponse) => {
+          setCategories(response.data);
           setIsLoading(false);
         })
         .catch((error: ErrorResponse) => {
@@ -37,10 +33,10 @@ export const useGetUserById = ({
       setIsLoading(false);
       setError('Please log in');
     }
-  }, [token]);
+  }, [token, page, pageSize, createdBy]);
 
   return {
-    data: user,
+    data: categories,
     loading: isLoading,
     error,
   };

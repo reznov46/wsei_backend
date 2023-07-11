@@ -4,33 +4,44 @@ import { endpoints } from '../routes/routes';
 import { FetchedData } from '../types/fetchedData';
 import { Product } from '../types/product';
 import { ErrorResponse, ProductResponse } from '../types/responses';
+import { useGetQueryParams } from './useGetQueryParams';
 import { useGetToken } from './useGetToken';
 
-export const useGetCurrentUserProducts = (): FetchedData<Product[]> => {
+export const useGetProducts = (
+  customPageNum?: number,
+  customPageSize?: number,
+): FetchedData<Product[]> => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
+
   const { token } = useGetToken();
+  const { page, pageSize, createdBy } = useGetQueryParams();
 
   useEffect(() => {
     if (token?.length) {
       axios
         .get(endpoints.userProducts, {
           headers: { Authorization: `Bearer ${token}` },
+          params: {
+            page: customPageNum ?? page,
+            pageSize: customPageSize ?? pageSize,
+            createdBy,
+          },
         })
         .then((response: ProductResponse) => {
           setProducts(response.data);
           setIsLoading(false);
         })
         .catch((error: ErrorResponse) => {
-          setError(error.response.data);
+          setError(error.response.data.error);
           setIsLoading(false);
         });
     } else {
       setIsLoading(false);
       setError('Please log in');
     }
-  }, [token]);
+  }, [token, page, pageSize, createdBy]);
 
   return {
     data: products,

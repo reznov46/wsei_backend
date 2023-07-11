@@ -1,3 +1,5 @@
+import { ProductCategory } from './ProductCategory';
+
 export interface Product {
   id: string;
   name: string;
@@ -7,4 +9,5 @@ export interface Product {
   fullDescription: string;
   createdAt: string;
   createdBy: string;
+  productCategory: ProductCategory;
 }

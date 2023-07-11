@@ -23,7 +23,13 @@ export const LoginForm: React.FC = () => {
         history.push(routeBuilder.details);
         setToken(response);
       })
-      .catch((error: ErrorResponse) => setError(error.response.data));
+      .catch((error: ErrorResponse) => {
+        let errorMessage = error.response.data.message;
+        if (error.response.data.statusCode === 401) {
+          errorMessage = 'Incorrect username or password'
+        }
+        setError(errorMessage)
+      });
   };
 
   return (

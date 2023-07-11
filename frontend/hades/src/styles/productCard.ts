@@ -19,4 +19,9 @@ export const productCardStyles = {
     display: 'flex',
     justifyContent: 'center',
   },
+  subHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '1rem',
+  },
 };

@@ -14,34 +14,49 @@ import { getRandomImg } from './utils';
 export const ProductCard: React.FC<{
   product: Product
 }> = ({ product }) => {
-  const { name, price, description, fullDescription } = product;
+  const { name, price, description, fullDescription, productCategory } = product;
 
   return (
     <Card sx={productCardStyles.card}>
       <CardHeader
         title={name}
-        subheader={price + '$'}
+        subheader={
+          <SubHeader
+            price={price}
+            categoryName={productCategory.name}
+          />
+        }
       />
       <CardMedia
         component="img"
         image={getRandomImg()}
       />
       <CardContent>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          fontFamily={FONT_FAMILY}
-        >
-          {description}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          fontFamily={FONT_FAMILY}
-        >
-          {fullDescription}
-        </Typography>
+        <Text text={description} />
+        <Text text={fullDescription} />
       </CardContent>
     </Card>
   )
 }
+
+const SubHeader: React.FC<{
+  price: number,
+  categoryName: string
+}> = ({ price, categoryName }) => (
+  <div style={productCardStyles.subHeader}>
+    <Typography>{price + '$'}</Typography>
+    <Typography>{categoryName}</Typography>
+  </div>
+);
+
+const Text: React.FC<{ text: string }> = ({
+  text
+}) => (
+  <Typography
+    variant="body2"
+    color="text.secondary"
+    fontFamily={FONT_FAMILY}
+  >
+    {text}
+  </Typography>
+);

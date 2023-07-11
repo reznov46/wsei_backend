@@ -11,6 +11,10 @@ export interface DefaultNavbarSection {
   open: boolean;
 }
 
+export interface ProductSectionProps {
+  open: boolean;
+}
+
 export interface NavbarItemProps {
   open: boolean;
   item: NavbarElement;

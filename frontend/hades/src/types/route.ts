@@ -1,4 +1,5 @@
 export interface Route {
+  categories: string;
   details: string;
   home: string;
   login: string;
@@ -6,5 +7,5 @@ export interface Route {
   register: string;
   users: string;
   userId: string;
-  userProducts: string;
+  products: string;
 }

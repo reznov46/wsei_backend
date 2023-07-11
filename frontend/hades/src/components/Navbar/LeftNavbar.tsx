@@ -14,6 +14,7 @@ import { isAdmin } from '../../utils/isAdmin';
 import { useGetToken } from '../../hooks/useGetToken';
 import { LoginSection } from './LoginSection';
 import { NavbarList } from './NavbarList';
+import { ProductSection } from './ProductSection';
 
 export const LeftNavbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -48,6 +49,12 @@ export const LeftNavbar: React.FC = () => {
             isUserLogged={Boolean(token?.length)}
           />
         </List>
+        <Divider />
+        <ProductSection
+          open={open}
+          isUserLogged={Boolean(token?.length)}
+          isAdmin={isAdmin(level as UserLevel)}
+        />
         <Divider />
         <LoginSection
           open={open}
