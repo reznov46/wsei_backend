@@ -5,7 +5,7 @@ import { UserDetails } from './user';
 export type ErrorResponse = {
   response: {
     data: {
-      message: string;
+      message: string | string[];
       statusCode: number;
       error: string;
     };

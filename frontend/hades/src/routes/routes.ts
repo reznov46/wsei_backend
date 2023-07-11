@@ -10,13 +10,15 @@ export const endpoints = {
   categories: `${ATHENA_HOST}/productCategories`,
   currentUser: `${CERBER_HOST}/user-by-token`,
   login: `${CERBER_HOST}/login`,
-  userProducts: `${ATHENA_HOST}/products`,
+  products: `${ATHENA_HOST}/products`,
   register: `${CERBER_HOST}/register`,
   users: `${CERBER_HOST}/users`,
   user: (id: string): string => `${CERBER_HOST}/users/${id}`,
 };
 
 export const routeBuilder = {
+  addProduct: '/addProduct',
+  addCategory: '/addCategory',
   categories: '/categories',
   details: '/details',
   home: '/',

@@ -14,7 +14,11 @@ import { UserDetails } from '../../types/user';
 import { FONT_FAMILY } from '../../utils/consts';
 import { convertDate } from '../../utils/convertDate';
 import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
-import { getCreatedByParam, getPageParam, getPageSizeParam } from '../../utils/defaultParams';
+import {
+  getCreatedByParam,
+  getPageNumParam,
+  getPageSizeParam
+} from '../../utils/defaultParams';
 
 interface UserDetailsCardProps {
   user: UserDetails;
@@ -35,7 +39,7 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = ({
   const { data } = useGetCurrentUserDetails();
 
   const userProductsRoute =
-    `${routeBuilder.products}?${getCreatedByParam(id)}&${getPageParam(0)}&${getPageSizeParam()}`
+    `${routeBuilder.products}?${getCreatedByParam(id)}&${getPageNumParam(0)}&${getPageSizeParam()}`
 
   const handleOnClickBack = (): void => {
     redirectBack
@@ -85,11 +89,9 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = ({
         </div>
       </CardContent>
       <CardActions>
-        {data.id === id && (
-          <Button onClick={handleOnClickProduct}>
-            Your products
-          </Button>
-        )}
+        <Button onClick={handleOnClickProduct}>
+          {data.id === id ? 'Your products' : 'User products'}
+        </Button>
         <Button
           onClick={handleOnClickBack}
           style={userDetailsStyles.button}

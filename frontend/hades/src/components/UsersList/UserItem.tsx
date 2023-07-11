@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import {
   Avatar,
   Card,
@@ -10,7 +11,6 @@ import { UserDetails } from '../../types/user';
 import { convertDate } from '../../utils/convertDate';
 import { usersListStyles } from '../../styles/usersList';
 import { routeBuilder } from '../../routes/routes';
-import { useHistory, useLocation, useParams } from 'react-router';
 
 export const UserItem: React.FC<{ user: UserDetails }> = ({ user }) => {
   const history = useHistory();

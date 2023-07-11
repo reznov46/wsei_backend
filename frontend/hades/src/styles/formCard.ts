@@ -20,13 +20,31 @@ export const formStyles = {
   },
   error: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'start',
     fontSize: 14,
     fontFamily: FONT_FAMILY,
     marginTop: '10px',
     color: 'error',
   },
+  errorArray: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: 14,
+    fontFamily: FONT_FAMILY,
+    marginTop: '10px',
+  },
   button: {
     marginLeft: 'auto',
+  },
+  ul: {
+    listStyle: 'none',
+    width: '100%',
+  },
+  li: {
+    color: 'red',
+  },
+  selector: {
+    marginTop: '1rem',
+    height: '2.5rem',
   },
 };

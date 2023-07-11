@@ -3,7 +3,10 @@ import { useGetCategories } from '../../hooks/useGetCategories';
 import { routeBuilder } from '../../routes/routes';
 import { ErrorComponent } from '../Common/ErrorComponent';
 import { Loader } from '../Common/Loader';
-import { CategoryCard } from './CategoryCard';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import { CategoryItem } from './CategoryItem';
+import { categoryStyles } from '../../styles/categories';
 
 export const CategoriesList: React.FC = () => {
   const { data, loading, error } = useGetCategories();
@@ -22,10 +25,14 @@ export const CategoriesList: React.FC = () => {
   };
 
   return (
-    <>{data.map((category) => (
-      <div key={category.id}>
-        <CategoryCard category={category} />
-      </div>
-    ))}</>
+    <Box fontStyle={categoryStyles.div}>
+      <List dense style={categoryStyles.list}>
+        {data.map((category) => (
+          <div key={category.id}>
+            <CategoryItem category={category} />
+          </div>
+        ))}
+      </List>
+    </Box>
   )
 }

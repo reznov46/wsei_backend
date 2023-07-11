@@ -16,17 +16,18 @@ export const useGetProducts = (
   const [products, setProducts] = useState<Product[]>([]);
 
   const { token } = useGetToken();
-  const { page, pageSize, createdBy } = useGetQueryParams();
+  const { page, pageSize, createdBy, categoryId } = useGetQueryParams();
 
   useEffect(() => {
     if (token?.length) {
       axios
-        .get(endpoints.userProducts, {
+        .get(endpoints.products, {
           headers: { Authorization: `Bearer ${token}` },
           params: {
             page: customPageNum ?? page,
             pageSize: customPageSize ?? pageSize,
             createdBy,
+            categoryId,
           },
         })
         .then((response: ProductResponse) => {
@@ -41,7 +42,7 @@ export const useGetProducts = (
       setIsLoading(false);
       setError('Please log in');
     }
-  }, [token, page, pageSize, createdBy]);
+  }, [token, page, pageSize, createdBy, categoryId]);
 
   return {
     data: products,

@@ -13,7 +13,7 @@ export const LoginForm: React.FC = () => {
   const [error, setError] = useState<string>('');
   const history = useHistory();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -28,7 +28,7 @@ export const LoginForm: React.FC = () => {
         if (error.response.data.statusCode === 401) {
           errorMessage = 'Incorrect username or password'
         }
-        setError(errorMessage)
+        setError(errorMessage as string)
       });
   };
 
