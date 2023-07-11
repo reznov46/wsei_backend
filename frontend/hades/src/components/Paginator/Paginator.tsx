@@ -21,14 +21,16 @@ export const Paginator: React.FC<PaginatorProps> = ({
   const handlePrevClick = () => setPageNum(pageNum - 1);
 
   const getSideEffectInURL = (): string => {
-    const createdBySideEffect = createdBy ? getCreatedByParam(createdBy + '&') : '';
-    const categoryIdSideEffect = categoryId ? getCategoryIdParam(categoryId + '&') : '';
+    const createdBySideEffect = createdBy ? getCreatedByParam(createdBy) : '';
+    const categoryIdSideEffect = categoryId ? getCategoryIdParam(categoryId) : '';
 
     return createdBySideEffect || categoryIdSideEffect
   }
 
   useEffect(() => {
-    history.replace(`?${getSideEffectInURL()}&${getPageNumParam(pageNum)}&${getPageSizeParam(8)}`)
+    const surfix = getSideEffectInURL().length ? `${getSideEffectInURL()}&` : '';
+    const link = `?${surfix}${getPageNumParam(pageNum)}&${getPageSizeParam(8)}`;
+    history.replace(link)
   }, [pageNum]);
 
   return (

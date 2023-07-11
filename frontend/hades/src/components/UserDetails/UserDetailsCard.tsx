@@ -85,11 +85,9 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = ({
         </div>
       </CardContent>
       <CardActions>
-        {data.id === id && (
-          <Button onClick={handleOnClickProduct}>
-            Your products
-          </Button>
-        )}
+        <Button onClick={handleOnClickProduct}>
+          {data.id === id ? 'Your products' : 'See user products'}
+        </Button>
         <Button
           onClick={handleOnClickBack}
           style={userDetailsStyles.button}

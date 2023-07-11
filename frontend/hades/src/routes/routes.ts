@@ -18,6 +18,7 @@ export const endpoints = {
 
 export const routeBuilder = {
   addProduct: '/addProduct',
+  addCategory: '/addCategory',
   categories: '/categories',
   details: '/details',
   home: '/',

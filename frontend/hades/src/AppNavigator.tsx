@@ -11,12 +11,14 @@ import { SelectedUserDetails } from './components/UserDetails/SelectedUserDetail
 import { ProductsList } from './components/Products/ProductsList';
 import { CategoriesList } from './components/Categories/CategoriesList';
 import { AddProductForm } from './components/Products/AddProductForm';
+import { AddCategory } from './components/Categories/AddCategory';
 
 export const AppNavigator: React.FC = () => (
   <div style={appStyles.navigator}>
     <Switch>
       <Route path={routeBuilder.home} children={'initial'} exact />
       <Route path={routeBuilder.addProduct} component={AddProductForm} exact />
+      <Route path={routeBuilder.addCategory} component={AddCategory} exact />
       <Route path={routeBuilder.details} component={CurrentUserDetails} exact />
       <Route path={routeBuilder.categories} component={CategoriesList} exact />
       <Route path={routeBuilder.login} component={LoginForm} exact />
