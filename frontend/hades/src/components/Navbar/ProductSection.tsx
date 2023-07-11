@@ -9,7 +9,7 @@ export const ProductSection: React.FC<DefaultNavbarSection> = ({
   isAdmin
 }) => {
   const panel = isUserLogged
-    ? !isAdmin ? productPanel.slice(0, 2) : productPanel
+    ? !isAdmin ? productPanel.slice(0, 3) : productPanel
     : [];
 
   return (

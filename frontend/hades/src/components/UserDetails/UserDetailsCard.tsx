@@ -14,7 +14,7 @@ import { UserDetails } from '../../types/user';
 import { FONT_FAMILY } from '../../utils/consts';
 import { convertDate } from '../../utils/convertDate';
 import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
-import { getCreatedByParam, getPageParam, getPageSizeParam } from '../../utils/defaultParams';
+import { getCreatedByParam, getPageNumParam, getPageSizeParam } from '../../utils/defaultParams';
 
 interface UserDetailsCardProps {
   user: UserDetails;
@@ -35,7 +35,7 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = ({
   const { data } = useGetCurrentUserDetails();
 
   const userProductsRoute =
-    `${routeBuilder.products}?${getCreatedByParam(id)}&${getPageParam(0)}&${getPageSizeParam()}`
+    `${routeBuilder.products}?${getCreatedByParam(id)}&${getPageNumParam(0)}&${getPageSizeParam()}`
 
   const handleOnClickBack = (): void => {
     redirectBack

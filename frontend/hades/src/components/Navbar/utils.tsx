@@ -7,9 +7,9 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import CategoryIcon from '@mui/icons-material/Category';
 import { routeBuilder } from "../../routes/routes";
 import { NavbarElement } from "../../types/navbar";
-import { getPageParam, getPageSizeParam } from '../../utils/defaultParams';
+import { getPageNumParam, getPageSizeParam } from '../../utils/defaultParams';
 
-const productsRoute = `${routeBuilder.products}?${getPageParam(0)}&${getPageSizeParam(8)}`;
+const productsRoute = `${routeBuilder.products}?${getPageNumParam(0)}&${getPageSizeParam(8)}`;
 
 export const loginPanel = [
   { text: 'Login', link: routeBuilder.login, icon: <LoginIcon /> },
@@ -32,7 +32,7 @@ export const userPanel = [
 
 export const productPanel = [
   { text: 'Products', link: productsRoute, icon: <FormatListBulletedIcon /> },
-  { text: 'Categories', link: routeBuilder.categories, icon: <CategoryIcon /> },
   { text: 'Add Product', link: '', icon: <HomeIcon /> },
+  { text: 'Categories', link: routeBuilder.categories, icon: <CategoryIcon /> },
   { text: 'Add Category', link: '', icon: <HomeIcon /> },
 ] as Array<NavbarElement>
