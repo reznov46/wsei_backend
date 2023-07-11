@@ -26,7 +26,6 @@ export const ProductsList: React.FC = () => {
   if (!data.length) {
     return <ErrorComponent
       text='The inventory is empty'
-    // link={routeBuilder.users}
     />
   }
 
