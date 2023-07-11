@@ -6,9 +6,8 @@ export interface LoginSectionProps {
 }
 
 export interface DefaultNavbarSection {
-  isAdmin: boolean;
-  isUserLogged: boolean;
   open: boolean;
+  panel: Array<NavbarElement>;
 }
 
 export interface ProductSectionProps {

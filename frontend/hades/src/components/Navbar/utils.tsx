@@ -3,6 +3,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DetailsIcon from '@mui/icons-material/Details';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import CategoryIcon from '@mui/icons-material/Category';
 import { routeBuilder } from "../../routes/routes";
@@ -32,7 +33,10 @@ export const userPanel = [
 
 export const productPanel = [
   { text: 'Products', link: productsRoute, icon: <FormatListBulletedIcon /> },
-  { text: 'Add Product', link: '', icon: <HomeIcon /> },
+  { text: 'Add Product', link: routeBuilder.addProduct, icon: <AddCircleIcon /> },
+] as Array<NavbarElement>
+
+export const categoryPanel = [
   { text: 'Categories', link: routeBuilder.categories, icon: <CategoryIcon /> },
   { text: 'Add Category', link: '', icon: <HomeIcon /> },
 ] as Array<NavbarElement>

@@ -1,6 +1,5 @@
 import React, { useState, } from 'react';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {
@@ -14,18 +13,36 @@ import { isAdmin } from '../../utils/isAdmin';
 import { useGetToken } from '../../hooks/useGetToken';
 import { LoginSection } from './LoginSection';
 import { NavbarList } from './NavbarList';
-import { ProductSection } from './ProductSection';
+import {
+  adminPanel,
+  categoryPanel,
+  defaultPanel,
+  productPanel,
+  userPanel
+} from './utils';
 
 export const LeftNavbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { data: { level } } = useGetCurrentUserDetails();
   const { token } = useGetToken();
 
+  const isUserLogged = token?.length;
+
   const handleDrawerOpen = () =>
     setOpen(true);
 
   const handleDrawerClose = () =>
     setOpen(false);
+
+  const standardPanel = isUserLogged
+    ? defaultPanel.concat(isAdmin(level as UserLevel) ? adminPanel : userPanel)
+    : defaultPanel;
+
+  const categoryNavPanel = isUserLogged
+    ? !isAdmin ? categoryPanel.slice(0, 1) : categoryPanel
+    : [];
+
+  const productNavPanel = isUserLogged ? productPanel : [];
 
   return (
     <>
@@ -45,17 +62,17 @@ export const LeftNavbar: React.FC = () => {
         <List>
           <NavbarList
             open={open}
-            isAdmin={isAdmin(level as UserLevel)}
-            isUserLogged={Boolean(token?.length)}
+            panel={standardPanel}
           />
         </List>
-        <Divider />
-        <ProductSection
+        <NavbarList
           open={open}
-          isUserLogged={Boolean(token?.length)}
-          isAdmin={isAdmin(level as UserLevel)}
+          panel={productNavPanel}
         />
-        <Divider />
+        <NavbarList
+          open={open}
+          panel={categoryNavPanel}
+        />
         <LoginSection
           open={open}
           isUserLogged={Boolean(token?.length)}
@@ -63,4 +80,4 @@ export const LeftNavbar: React.FC = () => {
       </Drawer>
     </>
   );
-}
+};

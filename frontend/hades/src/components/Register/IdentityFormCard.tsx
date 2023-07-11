@@ -52,7 +52,8 @@ export const IdentityFormCard: React.FC<FormCardProps> = ({
               onChange={(evt) => setUser({
                 username: evt.target.value,
                 password: user.password,
-              })} />
+              })}
+            />
           </div>
           <div>
             <TextField
@@ -65,9 +66,10 @@ export const IdentityFormCard: React.FC<FormCardProps> = ({
               onChange={(evt) => setUser({
                 username: user.username,
                 password: evt.target.value,
-              })} />
+              })}
+            />
           </div>
-          {Boolean(error) && (
+          {error && (
             <Typography
               {...formStyles.error}
             >

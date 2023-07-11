@@ -21,7 +21,7 @@ export const useGetProducts = (
   useEffect(() => {
     if (token?.length) {
       axios
-        .get(endpoints.userProducts, {
+        .get(endpoints.products, {
           headers: { Authorization: `Bearer ${token}` },
           params: {
             page: customPageNum ?? page,

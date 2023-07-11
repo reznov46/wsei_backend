@@ -1,4 +1,5 @@
 export interface Route {
+  addProduct: string;
   categories: string;
   details: string;
   home: string;
