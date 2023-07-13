@@ -76,10 +76,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `full_description`, `price`, `product_category_id`, `created_at`, `created_by`, `is_deleted`) VALUES
-('5b27e865-3ddc-4f04-b6ef-8d0f4276a41e', 'Nowy item', 'testowe description', 'optional long description', 60.00, '19866e87-83d4-4572-8a71-2c2e23d0b51f', '2023-07-09 17:41:58', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', 0),
-('87959f54-a613-4282-b2d5-db20933001ff', 'Produkt usera', 'optional description', 'optional long description', 420.00, '80161f12-b600-493f-aeeb-66ac6bf955a3', '2023-07-01 00:14:49', '13ccb720-d6c8-11ed-b3ec-47ad62198f81', 0),
-('8ca35147-9093-4e8b-9970-a9f0ab585eb1', 'asdasdProdukt test use11231231r', 'opasdasdational description', 'optional long description', 120.00, '80161f12-b600-493f-aeeb-66ac6bf955a3', '2023-07-09 17:40:47', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', 0),
-('ad2b8aa5-49b6-4532-95b2-39fd81bd75e4', 'Product admina', 'optional description', 'optional long description', 69.00, '80161f12-b600-493f-aeeb-66ac6bf955a3', '2023-07-01 00:09:56', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', 0);
+('5b27e865-3ddc-4f04-b6ef-8d0f4276a41e', 'Watch', 'best accessory', 'The best accessory for man', 60.00, '080809c8-c9c7-474b-83af-d62ed17b268b', '2023-07-09 17:41:58', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', 0),
+('87959f54-a613-4282-b2d5-db20933001ff', 'Bear', 'For kinds', 'it helps sleep well', 20.00, '80161f12-b600-493f-aeeb-66ac6bf955a1', '2023-07-01 00:14:49', '13ccb720-d6c8-11ed-b3ec-47ad62198f81', 0),
+('8ca35147-9093-4e8b-9970-a9f0ab585eb1', 'Bacardi', 'Alcohol', 'For long nights', 120.00, '80161f12-b600-493f-aeeb-66ac6bf955a4', '2023-07-09 17:40:47', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', 0),
+('ad2b8aa5-49b6-4532-95b2-39fd81bd75e4', 'Poster', 'To hang on wall', 'You can see a perfect views nest to you', 69.00, '80161f12-b600-493f-aeeb-66ac6bf955a2', '2023-07-01 00:09:56', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', 0);
 
 --
 -- Indexes for dumped tables
