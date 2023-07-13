@@ -44,9 +44,11 @@ CREATE TABLE `productCategories` (
 -- Dumping data for table `productCategories`
 --
 INSERT INTO `productCategories` (`id`, `name`, `description`, `created_by`, `created_at`, `is_deleted`) VALUES
-('080809c8-c9c7-474b-83af-d62ed17b268b', 'Technology', 'description of this category', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 15:22:45', 1),
-('19866e87-83d4-4572-8a71-2c2e23d0b51f', 'Techno2', 'description of category Techno22', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 17:41:14', 0),
-('80161f12-b600-493f-aeeb-66ac6bf955a3', 'Art', 'description of category art', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 15:39:42', 0);
+('080809c8-c9c7-474b-83af-d62ed17b268b', 'Technology', 'Every kind of AGD products', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 15:22:45', 1),
+('80161f12-b600-493f-aeeb-66ac6bf955a1', 'Toys', 'Heaven for every children', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 15:39:42', 0),
+('80161f12-b600-493f-aeeb-66ac6bf955a2', 'Art', 'If you like painting it is something for you', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 15:39:42', 0),
+('80161f12-b600-493f-aeeb-66ac6bf955a3', 'Vegetables', 'If you want to be healthy', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 15:39:42', 0),
+('80161f12-b600-493f-aeeb-66ac6bf955a4', 'Alcohol', 'This category does not need any description', '3813f800-d6b9-11ed-b59f-d3e88e0f455e', '2023-07-09 15:39:42', 0);
 
 --
 -- Indexes for table `productCategories`
