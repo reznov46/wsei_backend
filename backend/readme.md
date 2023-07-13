@@ -11,11 +11,3 @@
 ## Athena - products
 
 - Port: 3002
-
-## Hermes - orders and deliveries
-
-- Port: 3003
-
-## Plutus - payments
-
-- Port: 3004
