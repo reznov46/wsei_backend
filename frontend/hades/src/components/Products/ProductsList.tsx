@@ -1,5 +1,5 @@
-import { Grid } from '@mui/material';
-import React from 'react';
+import { Alert, Grid } from '@mui/material';
+import React, { useState } from 'react';
 import { useGetProducts } from '../../hooks/useGetProducts';
 import { useGetQueryParams } from '../../hooks/useGetQueryParams';
 import { routeBuilder } from '../../routes/routes';
@@ -10,6 +10,7 @@ import { Paginator } from '../Paginator/Paginator';
 import { ProductCard } from './ProductCard';
 
 export const ProductsList: React.FC = () => {
+  const [isRemoveError, setIsRemoveError] = useState<boolean>(false);
   const { data, loading, error } = useGetProducts();
   const { pageSize } = useGetQueryParams();
 
@@ -29,6 +30,12 @@ export const ProductsList: React.FC = () => {
     />
   }
 
+  if (isRemoveError) {
+    return (
+      <Alert severity="error">Something went wrong, try again!</Alert>
+    )
+  }
+
   return (
     <>
       <Paginator
@@ -37,7 +44,7 @@ export const ProductsList: React.FC = () => {
       <Grid container>
         {data.map((product) => (
           <Grid item xs={3} style={productCardStyles.grid} key={product.id}>
-            <ProductCard product={product} />
+            <ProductCard product={product} setIsRemoveError={setIsRemoveError} />
           </Grid>
         ))}
       </Grid>

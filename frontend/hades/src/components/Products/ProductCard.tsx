@@ -5,16 +5,84 @@ import {
   CardMedia,
   Typography
 } from '@mui/material';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useEditItem } from '../../hooks/useEditItem';
+import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
+import { useRemoveItem } from '../../hooks/useRemoveItem';
+import { endpoints } from '../../routes/routes';
 import { productCardStyles } from '../../styles/productCard';
 import { Product } from '../../types/product';
 import { FONT_FAMILY } from '../../utils/consts';
+import { ManipulateIcons } from '../Common/ManipulateIcons';
+import { EditProduct } from './EditProduct';
 import { getRandomImg } from './utils';
 
-export const ProductCard: React.FC<{
+interface ProductCardProps {
   product: Product
-}> = ({ product }) => {
-  const { name, price, description, fullDescription, productCategory } = product;
+  setIsRemoveError: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveError }) => {
+  const {
+    id,
+    name,
+    price,
+    description,
+    fullDescription,
+    productCategory,
+    createdBy
+  } = product;
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [newDescription, setNewDescription] = useState<string>(description);
+  const [newFullDescription, setNewFullDescription] = useState<string>(fullDescription);
+
+  const { data: { id: currUserId } } = useGetCurrentUserDetails();
+
+  const body = {
+    id,
+    description: newDescription,
+    fullDescription: newFullDescription
+  };
+
+  const { editItem, isError: isEditError } = useEditItem({
+    endpoint: endpoints.products,
+    body
+  });
+
+  const { removeItem, isError } = useRemoveItem(endpoints.removeProduct(id));
+
+  const isIconsVisible = createdBy === currUserId;
+
+  const handleOpenModal = useCallback(() =>
+    setOpenModal(true),
+    [openModal]
+  );
+  const handleCloseModal = useCallback(() =>
+    setOpenModal(false),
+    [openModal]
+  );
+
+  useEffect(() => {
+    isError || isEditError && (setIsRemoveError(isError || isEditError))
+  }, [isError, isEditError])
+
+  const Icons: JSX.Element = (
+    <ManipulateIcons
+      removeItem={removeItem}
+      openModal={openModal}
+      handleOpenModal={handleOpenModal}
+      handleCloseModal={handleCloseModal}
+      onSubmit={editItem}
+    >
+      <EditProduct
+        handleCloseModal={handleCloseModal}
+        newDescription={newDescription}
+        setNewDescription={setNewDescription}
+        newFullDescription={newFullDescription}
+        setNewFullDescription={setNewFullDescription}
+      />
+    </ManipulateIcons>
+  )
 
   return (
     <Card sx={productCardStyles.card}>
@@ -26,6 +94,7 @@ export const ProductCard: React.FC<{
             categoryName={productCategory.name}
           />
         }
+        action={isIconsVisible && Icons}
       />
       <CardMedia
         component="img"
