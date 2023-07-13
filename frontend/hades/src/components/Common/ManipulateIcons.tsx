@@ -12,6 +12,9 @@ import {
 } from '../../utils/defaultParams';
 import { useHistory } from 'react-router';
 import { Tooltip } from '@mui/material';
+import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
+import { isAdmin } from '../../utils/isAdmin';
+import { UserLevel } from '../../types/user';
 
 interface ManipulateIconsProps {
   id?: string;
@@ -20,6 +23,7 @@ interface ManipulateIconsProps {
 
 export const ManipulateIcons: React.FC<ManipulateIconsProps> = ({ id, removeItem }) => {
   const history = useHistory();
+  const { data: { level } } = useGetCurrentUserDetails();
 
   const getLinkFilteredByCategory = (
     categoryId: string
@@ -42,11 +46,13 @@ export const ManipulateIcons: React.FC<ManipulateIconsProps> = ({ id, removeItem
           <EditIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Remove" onClick={removeItem}>
-        <IconButton edge="end">
-          <DeleteIcon />
-        </IconButton>
-      </Tooltip>
+      {isAdmin(level as UserLevel) && (
+        <Tooltip title="Remove" onClick={removeItem}>
+          <IconButton edge="end">
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      )}
     </>
   );
 };

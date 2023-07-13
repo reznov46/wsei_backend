@@ -20,7 +20,6 @@ export const CategoryItem: React.FC<{ category: Category }> = ({
     description
   } = category;
 
-
   const { removeItem, isError } = useRemoveItem(endpoints.removeCategory(id));
 
   return (

@@ -5,7 +5,7 @@ import {
   CardMedia,
   Typography
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRemoveItem } from '../../hooks/useRemoveItem';
 import { endpoints } from '../../routes/routes';
 import { productCardStyles } from '../../styles/productCard';
@@ -14,11 +14,18 @@ import { FONT_FAMILY } from '../../utils/consts';
 import { ManipulateIcons } from '../Common/ManipulateIcons';
 import { getRandomImg } from './utils';
 
-export const ProductCard: React.FC<{
+interface ProductCardProps {
   product: Product
-}> = ({ product }) => {
+  setIsRemoveError: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveError }) => {
   const { id, name, price, description, fullDescription, productCategory } = product;
   const { removeItem, isError } = useRemoveItem(endpoints.removeProduct(id));
+
+  useEffect(() => {
+    isError && (setIsRemoveError(isError))
+  }, [isError])
 
   return (
     <Card sx={productCardStyles.card}>
