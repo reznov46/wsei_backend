@@ -1,4 +1,4 @@
-const DEFAULT_PAGE_SIZE = 6;
+const DEFAULT_PAGE_SIZE = 8;
 
 export const getPageSizeParam = (size: number = DEFAULT_PAGE_SIZE) =>
   `pageSize=${size}`;
