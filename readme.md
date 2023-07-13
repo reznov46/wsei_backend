@@ -2,6 +2,9 @@
 
 Do uruchomienia projektu wymagany jest manager pakietów npm oraz docker.
 
+Przed uruchomieniem należy wypełnić pliki `.env` w folderach mikro-serwisów, które nie są wersjonowane.
+Ich przykłady znajdują się w plikach `.env.template`.
+
 Aby uruchomić projekt należy po prostu użyć komendy `docker-compose up` w folderze głównym projektu.
 Wszystkie usługi powinny uruchomić się samoistnie oraz gotowe do działania.
 
