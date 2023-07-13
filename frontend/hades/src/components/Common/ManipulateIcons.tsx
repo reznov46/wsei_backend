@@ -1,3 +1,4 @@
+
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,7 +13,12 @@ import {
 import { useHistory } from 'react-router';
 import { Tooltip } from '@mui/material';
 
-export const CategoryItemIcons: React.FC<{ id: string }> = ({ id }) => {
+interface ManipulateIconsProps {
+  id?: string;
+  removeItem: () => Promise<void>
+}
+
+export const ManipulateIcons: React.FC<ManipulateIconsProps> = ({ id, removeItem }) => {
   const history = useHistory();
 
   const getLinkFilteredByCategory = (
@@ -22,19 +28,21 @@ export const CategoryItemIcons: React.FC<{ id: string }> = ({ id }) => {
 
   return (
     <>
-      <Tooltip title="Filter products by this category">
-        <IconButton
-          onClick={() => history.push(getLinkFilteredByCategory(id))}
-        >
-          <FilterAltIcon />
-        </IconButton>
-      </Tooltip>
+      {id && (
+        <Tooltip title="Filter products by this category">
+          <IconButton
+            onClick={() => history.push(getLinkFilteredByCategory(id))}
+          >
+            <FilterAltIcon />
+          </IconButton>
+        </Tooltip>
+      )}
       <Tooltip title="Edit">
         <IconButton >
           <EditIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Remove">
+      <Tooltip title="Remove" onClick={removeItem}>
         <IconButton edge="end">
           <DeleteIcon />
         </IconButton>

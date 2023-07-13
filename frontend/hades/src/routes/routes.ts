@@ -12,6 +12,7 @@ export const endpoints = {
   login: `${CERBER_HOST}/login`,
   products: `${ATHENA_HOST}/products`,
   register: `${CERBER_HOST}/register`,
+  removeCategory: (id: string) => `${ATHENA_HOST}/productCategories/${id}`,
   users: `${CERBER_HOST}/users`,
   user: (id: string): string => `${CERBER_HOST}/users/${id}`,
 };
