@@ -6,15 +6,19 @@ import {
   Typography
 } from '@mui/material';
 import React from 'react';
+import { useRemoveItem } from '../../hooks/useRemoveItem';
+import { endpoints } from '../../routes/routes';
 import { productCardStyles } from '../../styles/productCard';
 import { Product } from '../../types/product';
 import { FONT_FAMILY } from '../../utils/consts';
+import { ManipulateIcons } from '../Common/ManipulateIcons';
 import { getRandomImg } from './utils';
 
 export const ProductCard: React.FC<{
   product: Product
 }> = ({ product }) => {
-  const { name, price, description, fullDescription, productCategory } = product;
+  const { id, name, price, description, fullDescription, productCategory } = product;
+  const { removeItem, isError } = useRemoveItem(endpoints.removeProduct(id));
 
   return (
     <Card sx={productCardStyles.card}>
@@ -25,6 +29,9 @@ export const ProductCard: React.FC<{
             price={price}
             categoryName={productCategory.name}
           />
+        }
+        action={
+          <ManipulateIcons removeItem={removeItem} />
         }
       />
       <CardMedia
