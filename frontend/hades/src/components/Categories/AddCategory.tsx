@@ -73,7 +73,7 @@ export const AddCategory: React.FC = () => {
             type="submit"
             style={formStyles.button}
           >
-            ADD
+            Add
           </Button>
         </CardActions>
       </Card>

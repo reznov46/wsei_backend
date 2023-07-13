@@ -5,7 +5,8 @@ import {
   CardMedia,
   Typography
 } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useEditItem } from '../../hooks/useEditItem';
 import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
 import { useRemoveItem } from '../../hooks/useRemoveItem';
 import { endpoints } from '../../routes/routes';
@@ -13,6 +14,7 @@ import { productCardStyles } from '../../styles/productCard';
 import { Product } from '../../types/product';
 import { FONT_FAMILY } from '../../utils/consts';
 import { ManipulateIcons } from '../Common/ManipulateIcons';
+import { EditProduct } from './EditProduct';
 import { getRandomImg } from './utils';
 
 interface ProductCardProps {
@@ -30,14 +32,57 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveEr
     productCategory,
     createdBy
   } = product;
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [newDescription, setNewDescription] = useState<string>(description);
+  const [newFullDescription, setNewFullDescription] = useState<string>(fullDescription);
+
   const { data: { id: currUserId } } = useGetCurrentUserDetails();
+
+  const body = {
+    id,
+    description: newDescription,
+    fullDescription: newFullDescription
+  };
+
+  const { editItem, isError: isEditError } = useEditItem({
+    endpoint: endpoints.products,
+    body
+  });
+
   const { removeItem, isError } = useRemoveItem(endpoints.removeProduct(id));
 
   const isIconsVisible = createdBy === currUserId;
 
+  const handleOpenModal = useCallback(() =>
+    setOpenModal(true),
+    [openModal]
+  );
+  const handleCloseModal = useCallback(() =>
+    setOpenModal(false),
+    [openModal]
+  );
+
   useEffect(() => {
-    isError && (setIsRemoveError(isError))
-  }, [isError])
+    isError || isEditError && (setIsRemoveError(isError || isEditError))
+  }, [isError, isEditError])
+
+  const Icons: JSX.Element = (
+    <ManipulateIcons
+      removeItem={removeItem}
+      openModal={openModal}
+      handleOpenModal={handleOpenModal}
+      handleCloseModal={handleCloseModal}
+      onSubmit={editItem}
+    >
+      <EditProduct
+        handleCloseModal={handleCloseModal}
+        newDescription={newDescription}
+        setNewDescription={setNewDescription}
+        newFullDescription={newFullDescription}
+        setNewFullDescription={setNewFullDescription}
+      />
+    </ManipulateIcons>
+  )
 
   return (
     <Card sx={productCardStyles.card}>
@@ -49,9 +94,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveEr
             categoryName={productCategory.name}
           />
         }
-        action={
-          isIconsVisible && <ManipulateIcons removeItem={removeItem} />
-        }
+        action={isIconsVisible && Icons}
       />
       <CardMedia
         component="img"

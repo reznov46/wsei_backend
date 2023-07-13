@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -15,13 +15,26 @@ import { Tooltip } from '@mui/material';
 import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
 import { isAdmin } from '../../utils/isAdmin';
 import { UserLevel } from '../../types/user';
+import { EditModal } from '../EditModal/EditModal';
 
 interface ManipulateIconsProps {
   id?: string;
-  removeItem: () => Promise<void>
+  removeItem: () => Promise<void>;
+  openModal: boolean;
+  handleOpenModal: () => void;
+  handleCloseModal: () => void;
+  onSubmit: React.FormEventHandler<HTMLFormElement>
 }
 
-export const ManipulateIcons: React.FC<ManipulateIconsProps> = ({ id, removeItem }) => {
+export const ManipulateIcons: React.FC<ManipulateIconsProps & PropsWithChildren> = ({
+  id,
+  removeItem,
+  openModal,
+  handleOpenModal,
+  handleCloseModal,
+  onSubmit,
+  children
+}) => {
   const history = useHistory();
   const { data: { level } } = useGetCurrentUserDetails();
 
@@ -32,6 +45,13 @@ export const ManipulateIcons: React.FC<ManipulateIconsProps> = ({ id, removeItem
 
   return (
     <>
+      <EditModal
+        openModal={openModal}
+        handleCloseModal={handleCloseModal}
+        onSubmit={onSubmit}
+      >
+        {children}
+      </EditModal>
       {id && (
         <Tooltip title="Filter products by this category">
           <IconButton
@@ -41,7 +61,7 @@ export const ManipulateIcons: React.FC<ManipulateIconsProps> = ({ id, removeItem
           </IconButton>
         </Tooltip>
       )}
-      <Tooltip title="Edit">
+      <Tooltip title="Edit" onClick={handleOpenModal}>
         <IconButton >
           <EditIcon />
         </IconButton>

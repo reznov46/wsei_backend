@@ -9,7 +9,7 @@ interface UseRemoveItemResult {
   isError: boolean;
 }
 
-export const useRemoveItem = (endpoint: string) => {
+export const useRemoveItem = (endpoint: string): UseRemoveItemResult => {
   const [isError, setIsError] = useState<boolean>(false);
   const { token } = useGetToken();
 
