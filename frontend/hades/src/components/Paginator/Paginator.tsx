@@ -14,8 +14,8 @@ export const Paginator: React.FC<PaginatorProps> = ({
   disableNextButton
 }) => {
   const history = useHistory();
-  const { page, createdBy, categoryId } = useGetQueryParams();
-  const [pageNum, setPageNum] = useState<number>(0);
+  const { page = '0', createdBy, categoryId, pageSize = '8', } = useGetQueryParams();
+  const [pageNum, setPageNum] = useState<number>(Number(page));
 
   const handleNextClick = () => setPageNum(pageNum + 1);
   const handlePrevClick = () => setPageNum(pageNum - 1);
@@ -29,7 +29,7 @@ export const Paginator: React.FC<PaginatorProps> = ({
 
   useEffect(() => {
     const surfix = getSideEffectInURL().length ? `${getSideEffectInURL()}&` : '';
-    const link = `?${surfix}${getPageNumParam(pageNum)}&${getPageSizeParam(8)}`;
+    const link = `?${surfix}${getPageNumParam(pageNum)}&${getPageSizeParam(Number(pageSize))}`;
     history.replace(link)
   }, [pageNum]);
 
