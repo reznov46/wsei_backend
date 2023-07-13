@@ -6,6 +6,7 @@ import {
   Typography
 } from '@mui/material';
 import React, { useEffect } from 'react';
+import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
 import { useRemoveItem } from '../../hooks/useRemoveItem';
 import { endpoints } from '../../routes/routes';
 import { productCardStyles } from '../../styles/productCard';
@@ -20,8 +21,19 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveError }) => {
-  const { id, name, price, description, fullDescription, productCategory } = product;
+  const {
+    id,
+    name,
+    price,
+    description,
+    fullDescription,
+    productCategory,
+    createdBy
+  } = product;
+  const { data: { id: currUserId } } = useGetCurrentUserDetails();
   const { removeItem, isError } = useRemoveItem(endpoints.removeProduct(id));
+
+  const isIconsVisible = createdBy === currUserId;
 
   useEffect(() => {
     isError && (setIsRemoveError(isError))
@@ -38,7 +50,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveEr
           />
         }
         action={
-          <ManipulateIcons removeItem={removeItem} />
+          isIconsVisible && <ManipulateIcons removeItem={removeItem} />
         }
       />
       <CardMedia
