@@ -1,5 +1,5 @@
 
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -24,6 +24,7 @@ interface ManipulateIconsProps {
   handleOpenModal: () => void;
   handleCloseModal: () => void;
   onSubmit: React.FormEventHandler<HTMLFormElement>
+  createdBy?: string
 }
 
 export const ManipulateIcons: React.FC<ManipulateIconsProps & PropsWithChildren> = ({
@@ -33,15 +34,20 @@ export const ManipulateIcons: React.FC<ManipulateIconsProps & PropsWithChildren>
   handleOpenModal,
   handleCloseModal,
   onSubmit,
+  createdBy,
   children
 }) => {
   const history = useHistory();
-  const { data: { level } } = useGetCurrentUserDetails();
+  const { data: { level, id: userId } } = useGetCurrentUserDetails();
 
   const getLinkFilteredByCategory = (
     categoryId: string
   ): string =>
     `${routeBuilder.products}?${getCategoryIdParam(categoryId)}&${getPageNumParam()}&${getPageSizeParam()}`;
+
+  const isIconsVisible = isAdmin(level as UserLevel) || createdBy === userId;
+
+  console.log(isAdmin(level as UserLevel))
 
   return (
     <>
@@ -61,17 +67,19 @@ export const ManipulateIcons: React.FC<ManipulateIconsProps & PropsWithChildren>
           </IconButton>
         </Tooltip>
       )}
-      <Tooltip title="Edit" onClick={handleOpenModal}>
-        <IconButton >
-          <EditIcon />
-        </IconButton>
-      </Tooltip>
-      {isAdmin(level as UserLevel) && (
-        <Tooltip title="Remove" onClick={removeItem}>
-          <IconButton edge="end">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+      {isIconsVisible && (
+        <>
+          <Tooltip title="Edit" onClick={handleOpenModal}>
+            <IconButton >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Remove" onClick={removeItem}>
+            <IconButton edge="end">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </>
       )}
     </>
   );

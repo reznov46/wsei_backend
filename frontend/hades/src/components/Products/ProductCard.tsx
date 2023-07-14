@@ -7,7 +7,6 @@ import {
 } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useEditItem } from '../../hooks/useEditItem';
-import { useGetCurrentUserDetails } from '../../hooks/useGetCurrentUserDetails';
 import { useRemoveItem } from '../../hooks/useRemoveItem';
 import { endpoints } from '../../routes/routes';
 import { productCardStyles } from '../../styles/productCard';
@@ -36,8 +35,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveEr
   const [newDescription, setNewDescription] = useState<string>(description);
   const [newFullDescription, setNewFullDescription] = useState<string>(fullDescription);
 
-  const { data: { id: currUserId } } = useGetCurrentUserDetails();
-
   const body = {
     id,
     description: newDescription,
@@ -50,8 +47,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveEr
   });
 
   const { removeItem, isError } = useRemoveItem(endpoints.removeProduct(id));
-
-  const isIconsVisible = createdBy === currUserId;
 
   const handleOpenModal = useCallback(() =>
     setOpenModal(true),
@@ -73,6 +68,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveEr
       handleOpenModal={handleOpenModal}
       handleCloseModal={handleCloseModal}
       onSubmit={editItem}
+      createdBy={createdBy}
     >
       <EditProduct
         handleCloseModal={handleCloseModal}
@@ -94,7 +90,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, setIsRemoveEr
             categoryName={productCategory.name}
           />
         }
-        action={isIconsVisible && Icons}
+        action={Icons}
       />
       <CardMedia
         component="img"

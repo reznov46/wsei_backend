@@ -37,5 +37,5 @@ const authors = [
   'Sebastian Oraczek',
   'Przemysław Kędzierski',
   'Maciej Rawicz',
-  'Mareusz Nowak'
+  'Mateusz Nowak'
 ]

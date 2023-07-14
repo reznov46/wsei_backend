@@ -19,7 +19,7 @@ export const CategoryItem: React.FC<{ category: Category }> = ({
   const {
     id,
     name,
-    description
+    description,
   } = category;
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [newName, setNewName] = useState<string>(name);
